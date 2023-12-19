@@ -1,0 +1,102 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { QetQuizData } from "../services/Questionsdata";
+import { QuizData, RouteParams } from "../services/QuizTypes";
+import Header from "../header/header";
+
+const QuestionsPage: React.FC = () => {
+  const { quizId } = useParams<RouteParams>();
+  const [questions, setQuestions] = useState<QuizData["quizzes"][0]["questions"]>([]);
+  const [quizTitle, setQuizTitle] = useState<string>("");
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const alphabet = ["A","B","C","D"];
+  const [currentQuestion, setCurrentQuestion] = useState({
+    options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+    answer: 'Option 3', // Replace with your correct answer
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedQuizzes: QuizData = await QetQuizData();
+       let selectedQuiz;
+
+        for (const quiz of fetchedQuizzes) {
+          if (quiz.id === parseInt(quizId, 10)) {
+            selectedQuiz = quiz;
+            break;
+          }
+        }  
+        if (selectedQuiz) {
+          setQuizTitle(selectedQuiz.title);
+          setQuestions(selectedQuiz.questions);
+        } else {
+          console.log(`Quiz with ID ${quizId} not found.`);
+        }
+ 
+      } catch (error) {
+        console.error((error as Error).message);
+        // Handle the error, e.g., show an error message to the user
+      }
+    };
+  
+    fetchData();
+  }, [quizId]);
+
+  const handleNextQuestion = () => {
+
+    if (selectedOption === null) {
+        // No option selected, handle accordingly (e.g., show an alert)
+        alert('Please select an option.');
+        return;
+      }
+
+     
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  };
+
+
+  const handleOptionClick = (option: string) => {
+
+    setSelectedOption(option);
+
+      // Compare the selected option with the correct answer
+      if (selectedOption === currentQuestion.answer) {
+        alert('Correct!');
+      } else {
+        alert('Incorrect. The correct answer is: ' + currentQuestion.answer);
+      }
+  
+      // Reset the selected option for the next question
+      setSelectedOption(null);
+
+
+
+  };
+
+  const currentQuestionClick = questions[currentQuestionIndex];
+  return (
+    <div>
+      <Header title={quizTitle}/>
+      <h1>{quizTitle}</h1>
+      {currentQuestionClick ? (
+        <div>
+          <p>{`Question ${currentQuestionClick.id}: ${currentQuestionClick.question}`}</p>
+          <ul>
+        
+        {currentQuestionClick.options.map((option, index) => (
+          <li key={index} onClick={() => handleOptionClick(option)}>
+            <span className="alphabet">{alphabet[index]}</span> <span className="option">{option}</span> 
+          </li>
+        ))}
+          </ul>
+          <button onClick={handleNextQuestion} >Next Question</button>
+        </div>
+      ) : (
+        <p>No more questions.</p>
+      )}
+    </div>
+  );
+};
+
+export default QuestionsPage;
