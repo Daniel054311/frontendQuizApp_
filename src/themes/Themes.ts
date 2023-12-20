@@ -1,7 +1,7 @@
 // import mdark from '../../public/icon-moon-dark.svg'
 // import sdark from '../../public/icon-sun-dark.svg'
 // import mlight from '../../public/icon-moon-light.svg'
-// import slight from '../../public/icon-sun-dark.svg'
+
 import { DefaultTheme } from "styled-components";
 
 export interface Theme extends DefaultTheme {
@@ -22,18 +22,26 @@ export interface Theme extends DefaultTheme {
     Buttons: string,
     spanHover: string;
     spanActive: string;
+  
   };
   backgroundimg:{
     sunimgcolor: string;
     moonimgcolor: string;
     main: string;
-};
-  
+    correctEffect: string;
+    wrongEffect: string;
+  };
+  border: {
+    correctEffect: string;
+    wrongEffect: string;
+  }
 }
 export interface Themes {
   light: Theme;
   dark: Theme;
 }
+
+
 export const themes: Themes = {
   light: {
     name: "light",
@@ -44,7 +52,7 @@ export const themes: Themes = {
       homeComponent: "#F4F6FA",
       Buttons: "#A729F5",
       spanHover: " #F6E7FF",
-      spanActive:" #A729F5",
+      spanActive: " #A729F5",
     },
     color: {
       main:"#313E51",
@@ -58,7 +66,13 @@ export const themes: Themes = {
       sunimgcolor: '/icon-sun-dark.svg',
       moonimgcolor: '/icon-moon-dark.svg',
       main:'/pattern-background-desktop-light.svg',
-  },
+      wrongEffect:"/icon-incorrect.svg",
+      correctEffect: " /icon-correct.svg",
+    },
+    border: {
+      wrongEffect: "#EE5454",
+      correctEffect: "#26D782",
+    },
    
   },
   dark: {
@@ -71,7 +85,6 @@ export const themes: Themes = {
       Buttons: "#A729F5",
       spanHover: " #F6E7FF",
       spanActive:" #A729F5",
-  
     },
     color: {
       main:"#FFFFFF",
@@ -85,7 +98,13 @@ export const themes: Themes = {
       sunimgcolor: '/icon-sun-light.svg',
       moonimgcolor: '/icon-moon-light.svg',
       main:'/pattern-background-desktop-dark.svg',
-  },
+      wrongEffect:"/icon-incorrect.svg",
+      correctEffect: " /icon-correct.svg",
+    },
+    border: {
+      wrongEffect: "#EE5454",
+      correctEffect: "#26D782",
+    },
    
   },
 };

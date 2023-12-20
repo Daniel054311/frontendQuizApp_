@@ -1,6 +1,8 @@
 import styled, { createGlobalStyle, DefaultTheme } from 'styled-components'
 import { Theme,themes } from '../themes/Themes';
 
+
+
 export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme & Theme }>`
   * {
     margin: 0px;
@@ -40,22 +42,38 @@ img{
   border-radius:7px; 
 }
 
- li{
-cursor:pointer;
-display:flex;
-align-items:center;
-margin:10px;
-width:100%;
-gap:18px;
-padding:20px;
-border-radius:24px;
-background-color: ${({ theme }) => theme.background.optionsdiv};
-color: ${({ theme }) => theme.color.main};
+li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  width: 100%;
+  gap: 18px;
+  transition: all ease-in-out 0.3s;
+  padding: 20px;
+  border-radius: 24px;
+  background-color: ${({ theme }) => theme.background.optionsdiv};
+  color: ${({ theme }) => theme.color.main};
+  border: none; /* Remove the border from the default style */
 }
 
-li:active{
-  border:3px solid #A729F5;
+li.correct {
+  border: 2px solid  ${({ theme }) => theme.border.correctEffect};
 }
+li.correct img{
+  background-image: url(${({theme}) => theme.backgroundimg.correctEffect});
+}
+
+li.wrong {
+  border: 2px solid ${({ theme }) => theme.border.wrongEffect};
+}
+
+li.wrong img{
+  border: 2px solid   background-image: url(${({theme}) => theme.backgroundimg.wrongEffect});
+}
+
+
+
 span{
   display:flex;
 justify-content:center;
@@ -81,6 +99,7 @@ cursor:pointer;
 border:none;
 font-size:28px;
 padding:20px;
+transition: all ease-in-out 0.3s;
 border-radius:24px;
 background-color: ${({ theme }) => theme.background.Buttons};
 color: ${({ theme }) => theme.color.Buttons};

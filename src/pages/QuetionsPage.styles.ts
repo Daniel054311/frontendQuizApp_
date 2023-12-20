@@ -1,5 +1,8 @@
 import styled, { DefaultTheme } from "styled-components";
-import { Theme } from '../themes/Themes';
+
+interface SpanContainerProps {
+   isCorrect?: boolean;
+ }
 
 export const QPageWrapper = styled.div`
 display: grid;
@@ -50,3 +53,4 @@ font-size:36px;
 // border-radius:24px;
 
 // `;
+

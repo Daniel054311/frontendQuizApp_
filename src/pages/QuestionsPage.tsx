@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { QetQuizData } from "../services/Questionsdata";
 import { QuizData, RouteParams } from "../services/QuizTypes";
@@ -9,7 +9,10 @@ import { ItalicP } from "./home/Home.styles";
 
 
 
+
 const QuestionsPage: React.FC = () => {
+  
+  
   const { quizId } = useParams<RouteParams>();
   const [questions, setQuestions] = useState<QuizData["quizzes"][0]["questions"]>([]);
   const [quizTitle, setQuizTitle] = useState<string>("");
@@ -53,80 +56,95 @@ const QuestionsPage: React.FC = () => {
   const [optionSelected, setOptionSelected] = useState<boolean>(false);
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
   
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  
+  // const handleOptionClick = (selectedOption: string) => {
+  //   const currentQuestion = questions[currentQuestionIndex];
+
+  //   if (currentQuestion && selectedOption === currentQuestion.answer) {
+  //     alert("Correct!");
+  //     setCorrectMarks((prevMarks) => prevMarks + 1);
+  //     setButtonClicked(true);
+  //   } else {
+  //     alert("Wrong!");
+  //   }
+
+  //   setSelectedOption(selectedOption);
+  //   setOptionSelected(true);
+  // };
+
   const handleOptionClick = (selectedOption: string) => {
     const currentQuestion = questions[currentQuestionIndex];
-
-    if (currentQuestion && selectedOption === currentQuestion.answer) {
-      alert("Correct!");
-      setCorrectMarks((prevMarks) => prevMarks + 1);
-
-    } else {
-      alert("Wrong!");
-      setOptionSelected(true);
+  
+    if (currentQuestion) {
+      setSelectedOption(selectedOption);
+  
+      if (selectedOption === currentQuestion.answer) {
+        setCorrectMarks((prevMarks) => prevMarks + 1);
+      }
     }
+    setSelectedOption(selectedOption);
+     setOptionSelected(true);
   };
 
 
   const handleNextQuestion = () => {
-    if( currentQuestionIndex === TOTAL_QUESTIONS){
+    if (currentQuestionIndex === TOTAL_QUESTIONS) {
       setGameOver(true);
-    }else{
-      if(optionSelected){
+    } else {
+      if (optionSelected) {
         setOptionSelected(false);
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      }else {
-        setButtonClicked(true);
-      }
+        setButtonClicked(false);
+      } 
       
     }
   };
+
   const TOTAL_QUESTIONS = questions.length;
   const currentQuestion = questions[currentQuestionIndex];
+
   return (
     <div>
       <Header title={quizTitle} icon={quizIcon} />
-     
-      {/* <h1>{quizTitle}</h1> */}
-      {!gameOver && currentQuestion ?  (
+      {!gameOver && currentQuestion ? (
         <QPageWrapper>
-            <LeftContainer>
-              
-              <ItalicP>Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}</ItalicP>
-
+          <LeftContainer>
+            <ItalicP>
+              Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}
+            </ItalicP>
             <p>{` ${currentQuestion.question}`}</p>
-            </LeftContainer>
-            
+          </LeftContainer>
           <ul>
             {currentQuestion.options.map((option, index) => (
-              
-             <li key={index} onClick={() => handleOptionClick(option)} 
-             correct={currentQuestion.answer }
-             userCliked={currentQuestion.options}
-             >
+           <li
+           key={index}
+           onClick={() => handleOptionClick(option)}
+           className={`
+            ${selectedOption !== null &&
+            (selectedOption === option
+            ? option === currentQuestion.answer
+            ? "correct"
+            : "wrong"
+            : "")
+             }`}
+         >
                 <span className="alphabet">{alphabet[index]}</span>
-                <div className="option">{option}</div>
+                <div className="option">{option} </div>
+              
               </li>
             ))}
-          
-          
-          <button onClick={handleNextQuestion}>Next Question</button>
-        
-        {/* {  !optionSelected && buttonClicked ?( 
-            <span style={{visibility:"visible"}}>Please select an option before moving to the next question.</span>
-            ): 
-            <span style={{visibility:"hidden"}}>Please select an option before moving to the next question.</span>
-            }
-             */}
+            <button onClick={handleNextQuestion}>Next Question</button>
           </ul>
-         
         </QPageWrapper>
       ) : (
-
-        <CompletedPage  title={quizTitle} length={questions.length} score={correctMarks} icon={quizIcon} />
-     
-
+        <CompletedPage
+          title={quizTitle}
+          length={questions.length}
+          score={correctMarks}
+          icon={quizIcon}
+        />
       )}
-     
     </div>
   );
 };
