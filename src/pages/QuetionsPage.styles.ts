@@ -1,7 +1,7 @@
 import styled, { DefaultTheme } from "styled-components";
 
 interface LeftContainerProps {
-   value: number; // Add the 'value' prop to the interface
+   progress: number;// Add the 'value' prop to the interface
 }
  
 export const QPageWrapper = styled.div`
@@ -19,20 +19,28 @@ font-family: 'Rubik', sans-serif;
    }
 `;
 export const LeftContainer = styled.div<LeftContainerProps>`
-justify-content:center;
-gap:40px;
-display:flex;
-flex-direction:column;
-font-size:36px;
 
-div .slidder{
+input[type="range"] {
+   width:100%;
    -webkit-appearance: none;
-   accent-color: white;
-   cursor: pointer;
+  accent-color: white;
+  cursor: pointer;
+  height: 8px;
+  background-repeat: no-repeat;
+}
+.sliderTracker{
+   z-index: 5;
+   position:absoluet;
    height: 8px;
-   background-color: #3B4D66;
-   background-size: 30% 100%;
-   background-repeat: no-repeat;
+   background-size: ${({ progress }) => `${progress}% 100%`};
+   background-color: green;
+}
+input[type="range"]::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   height: 20px;
+   width: 20px;
+   background-color: white;
+   border-radius: 50%;
 }
 
 `;

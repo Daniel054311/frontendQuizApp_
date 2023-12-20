@@ -54,11 +54,10 @@ li {
   border-radius: 24px;
   background-color: ${({ theme }) => theme.background.optionsdiv};
   color: ${({ theme }) => theme.color.main};
-  border: none; /* Remove the border from the default style */
+  border: none;
 }
 
 li:active{
-  
     color:${({theme}) => theme.color.spanActive};
     border:2px solid  #A729F5;
 }
@@ -69,14 +68,16 @@ li.correct {
 }
 li.correct picture{
   z-index: 5;
-  position: fixed;
+  position: absolute;
+  left:90%;
   background-repeat:no-repeat;
   background-size:cover;
   background-image: url(${({theme}) => theme.backgroundimg.correctEffect});
 }
 li.wrong picture{
+  left:90%;
   z-index: 5;
-  position: fixed;
+  position: absolute;
   background-repeat:no-repeat;
   background-size:cover;
   background-image: url(${({theme}) => theme.backgroundimg.wrongEffect});
@@ -119,7 +120,31 @@ background-color: ${({ theme }) => theme.background.Buttons};
 color: ${({ theme }) => theme.color.Buttons};
 }
 
+ul .bottomWrong{
+  display: flex;
+  justify-content:center;
+  flex-direction:row;
 
+}
+
+ul .bottomWrong picture{
+  z-index: 5;
+  left:63%;
+  position: absolute;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-image: url(${({ theme }) => theme.backgroundimg.wrongEffect});
+
+  @media  screen and (max-width: 900px){
+    left:20%;
+    
+  }
+}
+
+ul p{
+  font-size:20px;
+  color:red;
+}
 
   .darkModeContainer {
     display: flex;
