@@ -94,12 +94,15 @@ const QuestionsPage: React.FC = () => {
     } else {
       if (optionSelected) {
         setOptionSelected(false);
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-        setButtonClicked(false);
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setButtonClicked(false);
+      setRangeValue((prevValue) => prevValue + 1);
       } 
       
     }
   };
+
+const [rangeValue, setRangeValue] = useState<number>(0);
 
   const TOTAL_QUESTIONS = questions.length;
   const currentQuestion = questions[currentQuestionIndex];
@@ -114,6 +117,19 @@ const QuestionsPage: React.FC = () => {
               Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}
             </ItalicP>
             <p>{` ${currentQuestion.question}`}</p>
+            <div>
+            <input
+            className="slidder"
+              type="range"
+              id="vol"
+              name="vol"
+              min="0"
+              max={TOTAL_QUESTIONS}
+              value={rangeValue}
+              onChange={(e) => setRangeValue(parseInt(e.target.value, 10))}
+            />
+            </div>
+            
           </LeftContainer>
           <ul>
             {currentQuestion.options.map((option, index) => (
@@ -129,12 +145,14 @@ const QuestionsPage: React.FC = () => {
             : "")
              }`}
          >
+          
                 <span className="alphabet">{alphabet[index]}</span>
+                
                 <div className="option">{option} </div>
-              
+                <picture  style={{width:"20px",height:"20px",marginLeft:"30%"}}><img src="" alt="" /></picture>
               </li>
             ))}
-            <button onClick={handleNextQuestion}>Next Question</button>
+            <button onClick={handleNextQuestion}>Submit Answer</button>
           </ul>
         </QPageWrapper>
       ) : (

@@ -57,21 +57,35 @@ li {
   border: none; /* Remove the border from the default style */
 }
 
+li:active{
+  
+    color:${({theme}) => theme.color.spanActive};
+    border:2px solid  #A729F5;
+}
+
 li.correct {
+  position: relative;
   border: 2px solid  ${({ theme }) => theme.border.correctEffect};
 }
-li.correct img{
+li.correct picture{
+  z-index: 5;
+  position: fixed;
+  background-repeat:no-repeat;
+  background-size:cover;
   background-image: url(${({theme}) => theme.backgroundimg.correctEffect});
+}
+li.wrong picture{
+  z-index: 5;
+  position: fixed;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-image: url(${({theme}) => theme.backgroundimg.wrongEffect});
 }
 
 li.wrong {
+  position: relative;
   border: 2px solid ${({ theme }) => theme.border.wrongEffect};
 }
-
-li.wrong img{
-  border: 2px solid   background-image: url(${({theme}) => theme.backgroundimg.wrongEffect});
-}
-
 
 
 span{

@@ -1,9 +1,9 @@
 import styled, { DefaultTheme } from "styled-components";
 
-interface SpanContainerProps {
-   isCorrect?: boolean;
- }
-
+interface LeftContainerProps {
+   value: number; // Add the 'value' prop to the interface
+}
+ 
 export const QPageWrapper = styled.div`
 display: grid;
 grid-template-columns: 1fr  1fr; 
@@ -18,39 +18,22 @@ font-family: 'Rubik', sans-serif;
       
    }
 `;
-export const LeftContainer = styled.div`
+export const LeftContainer = styled.div<LeftContainerProps>`
 justify-content:center;
 gap:40px;
 display:flex;
 flex-direction:column;
 font-size:36px;
 
+div .slidder{
+   -webkit-appearance: none;
+   accent-color: white;
+   cursor: pointer;
+   height: 8px;
+   background-color: #3B4D66;
+   background-size: 30% 100%;
+   background-repeat: no-repeat;
+}
+
 `;
-
-// export const SpanContainer = styled.span`
-// display:flex;
-// justify-content:center;
-// align-items:center;
-// border-radius:7px;
-// color:#313E51;
-// background-color:#F4F6FA;
-// height:40px;
-// width:40px;
-
-// &:active {
-//    color:#FFFF;
-//    background-color: #A729F5;
-//  }
-//  &:hover {
-//    color:#A729F5;
-//    background-color: #F6E7FF;
-//  }
-
-// `;
-
-// export const Buttons = styled.button`
-// padding:20px;
-// border-radius:24px;
-
-// `;
 
