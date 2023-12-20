@@ -12,12 +12,16 @@ export interface Theme extends DefaultTheme {
     optionselect: string;
     homeComponent: string;
     Buttons: string;
+    spanHover: string;
+    spanActive: string;
   };
   color: {
     main: string;
     optiontext: string;
     questionstext: string;
-    Buttons:string,
+    Buttons: string,
+    spanHover: string;
+    spanActive: string;
   };
   backgroundimg:{
     sunimgcolor: string;
@@ -38,13 +42,17 @@ export const themes: Themes = {
       optionsdiv: "#FFFFFF",
       optionselect: "#F4F6FA",
       homeComponent: "#F4F6FA",
-      Buttons:"#A729F5",
+      Buttons: "#A729F5",
+      spanHover: " #F6E7FF",
+      spanActive:" #A729F5",
     },
     color: {
       main:"#313E51",
       optiontext: "#3B4D66",
       questionstext: "#3B4D66",
-      Buttons:"#FFFFFF",
+      Buttons: "#FFFFFF",
+      spanHover: " #A729F5",
+      spanActive:"#FFFF;",
     },
     backgroundimg: {
       sunimgcolor: '/icon-sun-dark.svg',
@@ -60,14 +68,18 @@ export const themes: Themes = {
       optionselect: "#3B4D66",
       optionsdiv: "#3B4D66",
       homeComponent: "#313E51",
-      Buttons:"#A729F5",
+      Buttons: "#A729F5",
+      spanHover: " #F6E7FF",
+      spanActive:" #A729F5",
   
     },
     color: {
       main:"#FFFFFF",
       optiontext: "#FFFFFF",
       questionstext: "#FFFFFF",
-      Buttons:"#FFFFFF",
+      Buttons: "#FFFFFF",
+      spanHover: " #A729F5",
+      spanActive:"#FFFF;",
     },
     backgroundimg:{
       sunimgcolor: '/icon-sun-light.svg',

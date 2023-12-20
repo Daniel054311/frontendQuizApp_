@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  CourseImg, GetStarted, HomeWrapper, Optionsdiv, TitlesDiv, } from './Home.styles';
+import {  CourseImg, GetStarted, HomeWrapper, ItalicP, Optionsdiv, TitlesDiv, } from './Home.styles';
 import { QetQuizData } from '../../services/Questionsdata';
 import {QuizData} from '../../services/QuizTypes';
 import { Link } from 'react-router-dom';
@@ -50,7 +50,7 @@ const Home: React.FC = () =>{
 <h2>Frontend Quiz!</h2>
 </div>
 
-<p className='getStarted'>Pick a subject to get started.</p>
+<ItalicP className='getStarted'>Pick a subject to get started.</ItalicP>
 </div>
 
 </GetStarted>
@@ -62,7 +62,7 @@ const Home: React.FC = () =>{
 
     <Link key={quiz.id} to={`/questions/${quiz.id}`}>
       {/* Assuming questionId should start from 1 */}
-      <li key={quiz.id}>
+      <li key={quiz.id} style={{border:"none"}}>
        
           <img src={quiz.icon} alt={quiz.title} style={{padding:'2px'}}/>
         

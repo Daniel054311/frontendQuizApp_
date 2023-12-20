@@ -53,6 +53,28 @@ background-color: ${({ theme }) => theme.background.optionsdiv};
 color: ${({ theme }) => theme.color.main};
 }
 
+li:active{
+  border:3px solid #A729F5;
+}
+span{
+  display:flex;
+justify-content:center;
+align-items:center;
+border-radius:7px;
+color:#313E51;
+background-color:#F4F6FA;
+height:40px;
+width:40px;
+}
+span:hover{
+  color: ${({ theme }) => theme.color.spanHover};
+  background-color: ${({ theme }) => theme.background.spanHover};
+}
+span:active{
+color:${({theme}) => theme.color.spanActive};
+background-color:${({theme}) => theme.background.spanActive};
+}
+
 Button{
 font-family: 'Rubik', sans-serif;
 cursor:pointer;

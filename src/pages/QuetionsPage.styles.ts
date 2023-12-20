@@ -17,22 +17,33 @@ font-family: 'Rubik', sans-serif;
 `;
 export const LeftContainer = styled.div`
 justify-content:center;
-align-items:center;
+gap:40px;
 display:flex;
+flex-direction:column;
 font-size:36px;
 
 `;
 
-export const SpanContainer = styled.span`
-display:flex;
-justify-content:center;
-align-items:center;
-border-radius:7px;
-color:#313E51;
-background-color:#F4F6FA;
-height:40px;
-width:40px;
-`;
+// export const SpanContainer = styled.span`
+// display:flex;
+// justify-content:center;
+// align-items:center;
+// border-radius:7px;
+// color:#313E51;
+// background-color:#F4F6FA;
+// height:40px;
+// width:40px;
+
+// &:active {
+//    color:#FFFF;
+//    background-color: #A729F5;
+//  }
+//  &:hover {
+//    color:#A729F5;
+//    background-color: #F6E7FF;
+//  }
+
+// `;
 
 // export const Buttons = styled.button`
 // padding:20px;

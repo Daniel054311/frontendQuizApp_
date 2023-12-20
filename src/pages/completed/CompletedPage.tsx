@@ -21,7 +21,7 @@ export const CompletedPage: React.FC<{
       </div>
 
       <ul>
-        <li style={{justifyContent:"center"}}>
+        <li style={{justifyContent:"center",border:"none"}} >
           <ScoredContainer>
             <Accesibilty>
             <img src={props.icon} alt={props.title} />

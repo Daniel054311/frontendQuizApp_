@@ -24,7 +24,7 @@ const Header: React.FC<{ title: string ,icon:string}> = (props) => {
           <div className="darkModeContainer">
             <Accesibilty>
             <img src={props.icon} alt={props.title} />
-              <p>{props.title}</p>
+              <p style={{fontSize:"28px"}}>{props.title}</p>
             </Accesibilty>
 
             <div className='toglleContainer'>
@@ -33,7 +33,7 @@ const Header: React.FC<{ title: string ,icon:string}> = (props) => {
             <div className="sunImage" ><img src="" alt="" /></div>
             <label className="switch">
               <input type="checkbox" checked={isDarkMode}  onChange={handleChangeBackgroundColor}/>
-              <span className="slider round"></span>
+              <div className="slider round"></div>
             </label>
             <div className="moonImage"><img src="" alt="" /></div>
             {/* <img src={MoonImage} alt="moon toggle" style={{color:'black'}} /> */}

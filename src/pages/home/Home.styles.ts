@@ -29,13 +29,6 @@ gap:8px;
 }
 
 
-
-.leftContainer .getStarted {
-   font-size:20px;
-   font-style: italic;
- 
-}
-
 @media  screen and (max-width: 900px){
    .leftContainer{
       justify-content:center;
@@ -47,6 +40,10 @@ gap:8px;
 }
 
 `;
+export const ItalicP = styled.p`
+font-size:20px;
+   font-style: italic;
+`; 
 
 export const TitlesDiv = styled.div`
    display:flex;
