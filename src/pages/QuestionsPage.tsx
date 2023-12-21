@@ -77,18 +77,32 @@ const QuestionsPage: React.FC = () => {
   // };
 
   const handleOptionClick = (selectedOption: string) => {
+    if (optionSelected) {
+      // User has already made a choice, ignore the click
+      return;
+    }
+  
     const currentQuestion = questions[currentQuestionIndex];
-
+  
     if (currentQuestion) {
       setSelectedOption(selectedOption);
-
+  
       if (selectedOption === currentQuestion.answer) {
         setCorrectMarks((prevMarks) => prevMarks + 1);
       }
     }
-    setSelectedOption(selectedOption);
     setOptionSelected(true);
+  
+    // Disable other options
+    const updatedQuestions = [...questions];
+    updatedQuestions[currentQuestionIndex].options.forEach((option, index) => {
+      if (option !== selectedOption) {
+        updatedQuestions[currentQuestionIndex].options[index] ;
+      }
+    });
+    setQuestions(updatedQuestions);
   };
+  
 
 
   const handleNextQuestion = () => {
