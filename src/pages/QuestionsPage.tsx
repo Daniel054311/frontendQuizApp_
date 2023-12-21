@@ -1,12 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+/* global m */
+
+
+import React, {  useEffect, useState } from "react";
+import {  useParams } from "react-router-dom";
 import { QetQuizData } from "../services/Questionsdata";
 import { QuizData, RouteParams } from "../services/QuizTypes";
 import Header from "../header/header";
 import {
   LeftContainer,
   QPageWrapper,
-  SpanContainer,
+ 
 } from "./QuetionsPage.styles";
 import { CompletedPage } from "./completed/CompletedPage";
 import { ItalicP } from "./home/Home.styles";
@@ -94,8 +97,9 @@ const QuestionsPage: React.FC = () => {
     } else {
       if (optionSelected) {
         setOptionSelected(false);
+        setButtonClicked(false); 
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-        setButtonClicked(false); // Set buttonClicked to false when an option is selected
+       // Set buttonClicked to false when an option is selected
         setRangeValue((prevValue) => prevValue + 1);
 
         setTrackerWidth((prevWidth) => prevWidth + 10);
@@ -116,7 +120,7 @@ const QuestionsPage: React.FC = () => {
       {!gameOver && currentQuestion ? (
         <QPageWrapper>
           <LeftContainer  trackerwidth={trackerWidth}>
-            <ItalicP>
+            <ItalicP style={{marginBottom:"28px"}}>
               Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}
             </ItalicP>
             

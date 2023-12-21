@@ -1,15 +1,14 @@
-import styled, { DefaultTheme } from "styled-components";
+import styled from "styled-components";
 
 interface LeftContainerProps {
 
-   trackerwidth: number;
+   trackerwidth: number; 
 
 }
  
 export const QPageWrapper = styled.div`
 display: grid;
 grid-template-columns: 1fr  1fr; 
-align-items: center;
 padding: 50px 7%;
 grid-gap: 20%;
 font-family: 'Rubik', sans-serif;
@@ -25,7 +24,7 @@ position:relative;
 transition: all ease-in-out 0.3s;
 .sliderContainer{
    position:absolute;
-  bottom:-26%;
+  bottom:12%;
    display:flex;
    position:absolute;
    align-items:center;
@@ -42,7 +41,7 @@ transition: all ease-in-out 0.3s;
    border-radius: 24px;
    z-index: 5;
    height: 5px;
-   width: ${({ trackerwidth }) => `${trackerwidth}% `};
+   width: ${({ trackerwidth }) => `${trackerwidth}%`};
    background-color: #A729F5;
 }
 
