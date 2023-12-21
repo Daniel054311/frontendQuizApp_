@@ -20,18 +20,18 @@ export const CompletedPage: React.FC<{
         <h2>You scored...</h2>
       </div>
 
-      <ul>
-        <li style={{justifyContent:"center",border:"none"}} >
+      <ul >
+        <li style={{justifyContent:"center",border:"none",cursor:"default"}} >
           <ScoredContainer>
             <Accesibilty>
             <img src={props.icon} alt={props.title} />
-              <p> {props.title}</p>
+              <p > {props.title}</p>
             </Accesibilty>
             <TotalScore>
             <h2>
             {props.score} 
             </h2>
-            <p>out of {props.length}</p>
+            <p >out of {props.length}</p>
             </TotalScore>
           </ScoredContainer>
         </li>

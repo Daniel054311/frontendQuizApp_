@@ -37,7 +37,7 @@ export interface Theme extends DefaultTheme {
   }
 }
 export interface Themes {
-  light: Theme;
+  light: Theme; 
   dark: Theme;
 }
 

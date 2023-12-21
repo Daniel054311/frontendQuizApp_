@@ -141,10 +141,6 @@ ul .bottomWrong picture{
   }
 }
 
-ul p{
-  font-size:20px;
-  color:red;
-}
 
   .darkModeContainer {
     display: flex;

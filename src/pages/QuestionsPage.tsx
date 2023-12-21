@@ -56,6 +56,7 @@ const QuestionsPage: React.FC = () => {
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [trackerWidth, setTrackerWidth] = useState<number>(0);
 
   // const handleOptionClick = (selectedOption: string) => {
   //   const currentQuestion = questions[currentQuestionIndex];
@@ -86,6 +87,7 @@ const QuestionsPage: React.FC = () => {
     setOptionSelected(true);
   };
 
+
   const handleNextQuestion = () => {
     if (currentQuestionIndex === TOTAL_QUESTIONS) {
       setGameOver(true);
@@ -95,6 +97,8 @@ const QuestionsPage: React.FC = () => {
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
         setButtonClicked(false); // Set buttonClicked to false when an option is selected
         setRangeValue((prevValue) => prevValue + 1);
+
+        setTrackerWidth((prevWidth) => prevWidth + 10);
       } else {
         setButtonClicked(true); // Set buttonClicked to true when no option is selected
       }
@@ -111,24 +115,18 @@ const QuestionsPage: React.FC = () => {
       <Header title={quizTitle} icon={quizIcon} />
       {!gameOver && currentQuestion ? (
         <QPageWrapper>
-          <LeftContainer progress={rangeValue}>
+          <LeftContainer  trackerwidth={trackerWidth}>
             <ItalicP>
               Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}
             </ItalicP>
+            
             <p>{` ${currentQuestion.question}`}</p>
-            <div className="slidderContainer">
-              <input
-                className="slidder"
-                type="range"
-                id="vol"
-                name="vol"
-                min="0"
-                max={TOTAL_QUESTIONS}
-                value={rangeValue}
-                onChange={(e) => setRangeValue(parseInt(e.target.value, 10))}
-              />
+      
+              <li className="sliderContainer" style={{padding:"3px"}}>
               <div className="sliderTracker"></div>
-            </div>
+              </li>
+
+              
           </LeftContainer>
           <ul>
             {currentQuestion.options.map((option, index) => (
@@ -160,9 +158,10 @@ const QuestionsPage: React.FC = () => {
                   <img src="" alt="" />
                 </picture>
                 <div>
-                <p>Please select an answer</p>
+                <p style={{fontSize:"20px",color:"red"}}>Please select an answer</p>
                 </div>
               </div>
+ 
             )}
           </ul>
         </QPageWrapper>

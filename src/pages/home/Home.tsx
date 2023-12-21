@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  CourseImg, GetStarted, HomeWrapper, ItalicP, Optionsdiv, TitlesDiv, } from './Home.styles';
+import {  GetStarted, HomeWrapper, ItalicP, Optionsdiv, TitlesDiv, } from './Home.styles';
 import { QetQuizData } from '../../services/Questionsdata';
 import {QuizData} from '../../services/QuizTypes';
 import { Link } from 'react-router-dom';
