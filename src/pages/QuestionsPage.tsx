@@ -138,12 +138,13 @@ const QuestionsPage: React.FC = () => {
               Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}
             </ItalicP>
             
+            <div style={{marginBottom:"15%"}}>
             <p>{` ${currentQuestion.question}`}</p>
-      
-              <li className="sliderContainer" style={{padding:"3px"}}>
+            </div>
+
+            <li className="sliderContainer" style={{padding:"3px"}}>
               <div className="sliderTracker"></div>
               </li>
-
               
           </LeftContainer>
           <ul>

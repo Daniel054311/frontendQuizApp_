@@ -1,30 +1,59 @@
-# React + TypeScript + Vite
+# Frontend Quiz App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a Frontend Quiz App built with React, Vite, and TypeScript. It allows users to select a quiz subject, answer multiple-choice questions, and receive feedback on their answers.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Author](#author)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Choose a quiz subject.
+- Answer questions by selecting a single option from multiple choices.
+- Receive instant feedback on the correctness of each answer.
+- Navigate through questions and see the progress tracker.
+- View the final score and completion status at the end.
+- Responsive design for various screen sizes.
 
-- Configure the top-level `parserOptions` property like this:
+## Screenshots
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+![](/public/subject_desktop.png)
+![](/public/subject_mobile.png)
+![](/public/question_desktop.png)
+![](/public/question_mobile.png)
+![](/public/completed_desktop.png)
+![](/public/completed_mobile.png)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Tech Stack
+
+- React
+- Vite
+- TypeScript
+- Styled Components (for styling)
+
+## Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine.
+
+1. Clone the repository:
+
+   ```bash
+   git clone [https://github.com/Daniel054311/frontendQuizApp_]
+
+   cd frontend-quiz-app
+   npm install
+
+## usage
+
+npm run dev
+
+## Author
+
+Daniel Forson
+
+

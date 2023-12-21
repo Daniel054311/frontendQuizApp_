@@ -20,10 +20,10 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme & Theme }>`
   }
 
   h2{ 
-    font-size:64px;
+    font-size:5rem;
  }
   p{
-    font-size:64px;
+    font-size:4rem;
     font-style:normal;
   }
 
