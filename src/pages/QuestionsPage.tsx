@@ -4,7 +4,7 @@
 import React, {  useEffect, useState } from "react";
 import {  useParams } from "react-router-dom";
 import { QetQuizData } from "../services/Questionsdata";
-import { QuizData, RouteParams } from "../services/QuizTypes";
+import { QuizData  } from "../services/QuizTypes";
 import Header from "../header/header";
 import {
   LeftContainer,
@@ -15,9 +15,9 @@ import { CompletedPage } from "./completed/CompletedPage";
 import { ItalicP } from "./home/Home.styles";
 
 const QuestionsPage: React.FC = () => {
-  const { quizId } = useParams<RouteParams>();
+  const { quizId } = useParams<any>();
   const [questions, setQuestions] = useState<
-    QuizData["quizzes"][0]["questions"]
+    QuizData[][0]["questions"]
   >([]);
   const [quizTitle, setQuizTitle] = useState<string>("");
   const [quizIcon, setQuizIcon] = useState<string>("");
@@ -29,11 +29,11 @@ const QuestionsPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedQuizzes: QuizData = await QetQuizData();
+        const fetchedQuizzes: QuizData[] = await QetQuizData();
         let selectedQuiz;
 
         for (const quiz of fetchedQuizzes) {
-          if (quiz.id === parseInt(quizId, 10)) {
+          if (quiz.id === parseInt(quizId!, 10)) {
             selectedQuiz = quiz;
             break;
           }
@@ -114,8 +114,7 @@ const QuestionsPage: React.FC = () => {
         setButtonClicked(false); 
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
        // Set buttonClicked to false when an option is selected
-        setRangeValue((prevValue) => prevValue + 1);
-
+        
         setTrackerWidth((prevWidth) => prevWidth + 10);
       } else {
         setButtonClicked(true); // Set buttonClicked to true when no option is selected
@@ -123,7 +122,6 @@ const QuestionsPage: React.FC = () => {
     }
   };
 
-  const [rangeValue, setRangeValue] = useState<number>(0);
 
   const TOTAL_QUESTIONS = questions.length;
   const currentQuestion = questions[currentQuestionIndex];

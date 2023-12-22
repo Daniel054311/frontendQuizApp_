@@ -44,7 +44,5 @@ transition: all ease-in-out 0.3s;
    width: ${({ trackerwidth }) => `${trackerwidth}%`};
    background-color: #A729F5;
 }
-
-
 `;
 

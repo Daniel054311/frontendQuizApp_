@@ -8,14 +8,12 @@ import Header from '../../header/header';
 
 const Home: React.FC = () =>{
 
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [error, setError] = useState<string | null>(null);
 
-  const [quizzes, setQuizes] = useState<QuizData['quizzes']>([]);
+  const [quizzes, setQuizes] = useState<QuizData[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedQuizzes:QuizData = await QetQuizData();
+        const fetchedQuizzes:QuizData[] = await QetQuizData();
         //console.log(fetchedQuizzes);
 
         if(fetchedQuizzes){
@@ -39,7 +37,7 @@ const Home: React.FC = () =>{
   return (
 
 <>
-<Header/>
+<Header title={""} icon={""}/>
 <HomeWrapper>
 
 <GetStarted>

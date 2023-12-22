@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle, DefaultTheme } from 'styled-components'
-import { Theme,themes } from '../themes/Themes';
+import { Theme } from '../themes/Themes';
 
 
 
