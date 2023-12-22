@@ -126,8 +126,13 @@ ul .bottomWrong{
   display: flex;
   justify-content:center;
   flex-direction:row;
-
 }
+
+ul .bottomWrong p{
+  font-size:20px;
+  color: ${({ theme }) => theme.color.wongColor};
+}
+
 
 ul .bottomWrong picture{
   z-index: 5;

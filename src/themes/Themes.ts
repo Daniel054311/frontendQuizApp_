@@ -22,6 +22,7 @@ export interface Theme extends DefaultTheme {
     Buttons: string,
     spanHover: string;
     spanActive: string;
+    wongColor: string;
   
   };
   backgroundimg:{
@@ -60,7 +61,8 @@ export const themes: Themes = {
       questionstext: "#3B4D66",
       Buttons: "#FFFFFF",
       spanHover: " #A729F5",
-      spanActive:"#FFFF;",
+      spanActive: "#FFFF;",
+      wongColor: "#EE5454",
     },
     backgroundimg: {
       sunimgcolor: '/icon-sun-dark.svg',
@@ -92,7 +94,8 @@ export const themes: Themes = {
       questionstext: "#FFFFFF",
       Buttons: "#FFFFFF",
       spanHover: " #A729F5",
-      spanActive:"#FFFF;",
+      spanActive: "#FFFF;",
+      wongColor: "#FFFFFF",
     },
     backgroundimg:{
       sunimgcolor: '/icon-sun-light.svg',
