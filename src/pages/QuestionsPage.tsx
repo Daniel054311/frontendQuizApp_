@@ -14,6 +14,8 @@ import {
 import { CompletedPage } from "./completed/CompletedPage";
 import { ItalicP } from "./home/Home.styles";
 
+
+
 const QuestionsPage: React.FC = () => {
   const { quizId } = useParams<any>();
   const [questions, setQuestions] = useState<
