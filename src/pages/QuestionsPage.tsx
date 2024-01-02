@@ -130,9 +130,13 @@ const QuestionsPage: React.FC = () => {
 const handleKeyDown = (event: React.KeyboardEvent) => {
   switch (event.key) {
     case "Enter":
+      if (optionSelected){
       // Handle the logic for selecting an option and moving to the next question
       handleOptionClick(selectedOption!);
       handleNextQuestion();
+      }else{
+        setButtonClicked(true);
+      }
       break;
     default:
       break;

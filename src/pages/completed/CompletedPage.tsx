@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Accesibilty } from "../../header/header.styles";
 import { HomeWrapper } from "../home/Home.styles";
 import {  ScoredContainer, TotalScore } from "./Completed.styles";
+import { useEffect } from "react";
 
 export const CompletedPage: React.FC<{
   title: string,
@@ -10,11 +11,27 @@ export const CompletedPage: React.FC<{
   icon:string
 }> = (props) => {
 
-  
+  const navigate = useNavigate();
+
+  const handlePlayAgainClick = () => {
+    navigate("/");
+  }
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === "Enter") {
+      handlePlayAgainClick();
+    }
+  };
+useEffect(()=>{
+  const playAgainButton = document.getElementById("playAgainButton");
+  if(playAgainButton){
+    playAgainButton.focus();
+  }
+},[]);
 
   return (
 
-    <HomeWrapper>
+    <HomeWrapper >
       <div>
         <p>Quiz Completed</p>
         <h2>You scored...</h2>
@@ -35,9 +52,12 @@ export const CompletedPage: React.FC<{
             </TotalScore>
           </ScoredContainer>
         </li>
-        <Link to={"/"} >
-        <button style={{width:"100%"}}>Play Again </button>
-        </Link>
+        
+        <button style={{width:"100%"}}
+        id="playAgainButton"
+         onKeyDown={handleKeyPress}
+        >Play Again </button>
+       
           
         
       </ul>
