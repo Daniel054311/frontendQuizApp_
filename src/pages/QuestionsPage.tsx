@@ -2,7 +2,7 @@
 
 
 import React, {  useEffect, useState } from "react";
-import {  useParams } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { QetQuizData } from "../services/Questionsdata";
 import { QuizData  } from "../services/QuizTypes";
 import Header from "../header/header";
@@ -27,6 +27,8 @@ const QuestionsPage: React.FC = () => {
   const alphabet = ["A", "B", "C", "D"];
   const [correctMarks, setCorrectMarks] = useState<number>(0);
   const [gameOver, setGameOver] = useState(true);
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,12 +126,25 @@ const QuestionsPage: React.FC = () => {
     }
   };
 
+// onkeypress
+const handleKeyDown = (event: React.KeyboardEvent) => {
+  switch (event.key) {
+    case "Enter":
+      // Handle the logic for selecting an option and moving to the next question
+      handleOptionClick(selectedOption!);
+      handleNextQuestion();
+      break;
+    default:
+      break;
+  }
+};
+
 
   const TOTAL_QUESTIONS = questions.length;
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div>
+    <div onKeyDown={handleKeyDown} tabIndex={0}>
       <Header title={quizTitle} icon={quizIcon} />
       {!gameOver && currentQuestion ? (
         <QPageWrapper>
