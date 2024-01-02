@@ -57,9 +57,13 @@ li {
   border: none;
 }
 
+
 li:active{
     color:${({theme}) => theme.color.spanActive};
     border:2px solid  #A729F5;
+}
+li: hover{
+  border:2px solid  #A729F5;
 }
 
 li.correct {
@@ -120,6 +124,9 @@ transition: all ease-in-out 0.3s;
 border-radius:24px;
 background-color: ${({ theme }) => theme.background.Buttons};
 color: ${({ theme }) => theme.color.Buttons};
+}
+Button:hover{
+  opacity: 0.6;
 }
 
 ul .bottomWrong{

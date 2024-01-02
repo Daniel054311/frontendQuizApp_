@@ -63,7 +63,7 @@ const Home: React.FC = () =>{
 
     <Link key={quiz.id} to={`/questions/${quiz.id}`}>
       {/* Assuming questionId should start from 1 */}
-      <li key={quiz.id} style={{border:"none"}}>
+      <li key={quiz.id}  className='courseTitle' >
        
           <img src={quiz.icon} alt={quiz.title} style={{padding:'2px'}}/>
         

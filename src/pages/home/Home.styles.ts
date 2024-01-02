@@ -9,6 +9,7 @@ display: grid;
 grid-template-columns: 1fr  1fr; 
 padding: 50px 7%;
 
+
     @media  screen and (max-width: 900px){
       grid-template-columns:  1fr; 
       gap:64px;
@@ -53,9 +54,11 @@ export const TitlesDiv = styled.div`
 // console.log(theme);
 
 
-export const Optionsdiv = styled.div<{ theme: DefaultTheme & Theme }>`
-  
- 
+export const Optionsdiv = styled.div`
+ul .courseTitle: hover{
+   transition: all ease-in-out 0.3s;
+   border:2px solid  #A729F5;
+ }
 `;
 
 

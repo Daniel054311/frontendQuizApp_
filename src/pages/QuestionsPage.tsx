@@ -138,7 +138,11 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
         setButtonClicked(true);
       }
       break;
+
+
+
     default:
+      
       break;
   }
 };
