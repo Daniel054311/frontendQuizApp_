@@ -1,5 +1,5 @@
-import styled, { DefaultTheme } from "styled-components";
-import { Theme } from "../../themes/Themes";
+import styled  from "styled-components";
+
 
 
 

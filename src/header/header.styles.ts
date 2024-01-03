@@ -68,6 +68,7 @@ li: hover{
 li.correct {
   position: relative;
   border: 2px solid  ${({ theme }) => theme.border.correctEffect};
+  
 }
 .correct span{
   background-color: ${({ theme }) => theme.border.correctEffect};

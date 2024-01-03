@@ -35,7 +35,7 @@ const Home: React.FC = () =>{
   }, []);
 
 
-  
+  const backgroundColors = ['#FFF1E9', '#E0FDEF', '#EBF0FF', '#F6E7FF'];
 
   return (
 
@@ -59,13 +59,13 @@ const Home: React.FC = () =>{
   <Optionsdiv>
   
   <ul>
-  {quizzes && quizzes.map((quiz) => (
+  {quizzes && quizzes.map((quiz,index) => (
 
     <Link key={quiz.id} to={`/questions/${quiz.id}`}>
       {/* Assuming questionId should start from 1 */}
       <li key={quiz.id}  className='courseTitle' >
        
-          <img src={quiz.icon} alt={quiz.title} style={{padding:'2px'}}/>
+          <img src={quiz.icon} alt={quiz.title} style={{ padding: '2px', backgroundColor: backgroundColors[index % backgroundColors.length] }}/>
         
         <TitlesDiv>
         {quiz.title}
