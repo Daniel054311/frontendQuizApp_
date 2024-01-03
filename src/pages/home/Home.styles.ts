@@ -7,7 +7,7 @@ export const HomeWrapper = styled.div`
 font-family: 'Rubik', sans-serif;
 display: grid;
 grid-template-columns: 1fr  1fr; 
-padding: 50px 7%;
+padding: 2% 7%;
 
 
     @media  screen and (max-width: 900px){

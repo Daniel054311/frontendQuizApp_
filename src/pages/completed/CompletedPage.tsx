@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { Accesibilty } from "../../header/header.styles";
 import { HomeWrapper } from "../home/Home.styles";
-import {  ScoredContainer, TotalScore } from "./Completed.styles";
+import { ScoredContainer, TotalScore } from "./Completed.styles";
 import { useEffect } from "react";
 
 export const CompletedPage: React.FC<{
   title: string,
   length: number,
   score: number | 0,
-  icon:string
+  icon: string
 }> = (props) => {
 
   const navigate = useNavigate();
@@ -17,20 +17,24 @@ export const CompletedPage: React.FC<{
     navigate("/");
   }
 
+  const handleButtonClick = () => {
+    handlePlayAgainClick();
+  }
+
   const handleKeyPress = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === "Enter") {
-      handlePlayAgainClick();
+      handleButtonClick();
     }
   };
-useEffect(()=>{
-  const playAgainButton = document.getElementById("playAgainButton");
-  if(playAgainButton){
-    playAgainButton.focus();
-  }
-},[]);
+
+  useEffect(() => {
+    const playAgainButton = document.getElementById("playAgainButton");
+    if (playAgainButton) {
+      playAgainButton.focus();
+    }
+  }, []);
 
   return (
-
     <HomeWrapper >
       <div>
         <p>Quiz Completed</p>
@@ -38,28 +42,27 @@ useEffect(()=>{
       </div>
 
       <ul >
-        <li style={{justifyContent:"center",border:"none",cursor:"default"}} >
+        <li style={{ justifyContent: "center", border: "none", cursor: "default" }} >
           <ScoredContainer>
             <Accesibilty>
-            <img src={props.icon} alt={props.title} />
+              <img src={props.icon} alt={props.title} />
               <p > {props.title}</p>
             </Accesibilty>
             <TotalScore>
-            <h2>
-            {props.score} 
-            </h2>
-            <p >out of {props.length}</p>
+              <h2>
+                {props.score}
+              </h2>
+              <p >out of {props.length}</p>
             </TotalScore>
           </ScoredContainer>
         </li>
-        
-        <button style={{width:"100%"}}
-        id="playAgainButton"
-         onKeyDown={handleKeyPress}
+
+        <button style={{ width: "100%" }}
+          id="playAgainButton"
+          onClick={handleButtonClick}
+          onKeyDown={handleKeyPress}
         >Play Again </button>
-       
-          
-        
+
       </ul>
     </HomeWrapper>
   );

@@ -9,7 +9,7 @@ interface LeftContainerProps {
 export const QPageWrapper = styled.div`
 display: grid;
 grid-template-columns: 1fr  1fr; 
-padding: 50px 7%;
+padding: 2% 7%;
 grid-gap: 20%;
 font-family: 'Rubik', sans-serif;
 

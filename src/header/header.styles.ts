@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme & Theme }>`
   }
   body {
     font-family: 'Rubik', sans-serif;
-    overflow-x: hidden;
+    overflow: hidden;
     background-repeat:no-repeat;
     background-size:cover;
     background-image: url(${({theme}) => theme.backgroundimg.main});
@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme & Theme }>`
     font-size:5rem;
  }
   p{
-    font-size:4rem;
+    font-size:2rem;
     font-style:normal;
   }
 
@@ -46,11 +46,10 @@ li {
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin: 10px;
   width: 100%;
-  gap: 18px;
+  gap: 8%;
   transition: all ease-in-out 0.3s;
-  padding: 20px;
+  padding: 15px;
   border-radius: 24px;
   background-color: ${({ theme }) => theme.background.optionsdiv};
   color: ${({ theme }) => theme.color.main};
