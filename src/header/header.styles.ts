@@ -70,6 +70,10 @@ li.correct {
   position: relative;
   border: 2px solid  ${({ theme }) => theme.border.correctEffect};
 }
+.correct span{
+  background-color: ${({ theme }) => theme.border.correctEffect};
+}
+
 li.correct picture{
   z-index: 5;
   position: absolute;
@@ -92,7 +96,9 @@ li.wrong {
   border: 2px solid ${({ theme }) => theme.border.wrongEffect};
 }
 
-
+.wrong span {
+  background-color: ${({ theme }) => theme.border.wrongEffect};
+}
 
 
 span{
