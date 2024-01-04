@@ -11,7 +11,6 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme & Theme }>`
   }
   body {
     font-family: 'Rubik', sans-serif;
-    overflow: hidden;
     background-repeat:no-repeat;
     background-size:cover;
     background-image: url(${({theme}) => theme.backgroundimg.main});

@@ -12,7 +12,7 @@ padding: 2% 7%;
 
     @media  screen and (max-width: 900px){
       grid-template-columns:  1fr; 
-      gap:64px;
+      gap:6%;
       
    }
 
@@ -20,7 +20,7 @@ padding: 2% 7%;
 export const GetStarted = styled.div`
 .leftContainer{
    display:flex;
-  gap:48px;
+  gap:5vh;
    flex-direction:column;
   
 }
@@ -33,7 +33,6 @@ gap:8px;
    .leftContainer{
       justify-content:center;
       display:flex;
-     gap:48px;
       flex-direction:column;
    }
    

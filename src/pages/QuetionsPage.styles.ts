@@ -15,7 +15,7 @@ font-family: 'Rubik', sans-serif;
 
     @media  screen and (max-width: 900px){
       grid-template-columns:  1fr; 
-      gap:64px;
+      gap:10%;
       
    }
 `;
@@ -29,10 +29,7 @@ transition: all ease-in-out 0.3s;
    position:absolute;
    align-items:center;
 
-   @media  screen and (max-width: 900px){
-      bottom:-70px;
-      
-   }
+   
 
 }
 
