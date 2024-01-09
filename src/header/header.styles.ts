@@ -1,19 +1,19 @@
-import styled, { createGlobalStyle, DefaultTheme } from 'styled-components'
-import { Theme } from '../themes/Themes';
-
-
+import styled, { createGlobalStyle, DefaultTheme } from "styled-components";
+import { Theme } from "../themes/Themes";
 
 export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme & Theme }>`
   * {
     margin: 0px;
     padding: 0px;
-    box-sizing: border-box;
+    
+    
   }
   body {
     font-family: 'Rubik', sans-serif;
     background-repeat:no-repeat;
     background-size:cover;
-    background-image: url(${({theme}) => theme.backgroundimg.main});
+    overflow: scroll;
+    background-image: url(${({ theme }) => theme.backgroundimg.main});
     background-color: ${({ theme }) => theme.background.main};
     color: ${({ theme }) => theme.color.main};
   }
@@ -34,6 +34,8 @@ ul{
    justify-content:center;
    flex-direction:column;
    gap:12px;
+ 
+
 }
 
 img{
@@ -42,10 +44,11 @@ img{
 }
 
 li {
+
   cursor: pointer;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: auto;
   gap: 8%;
   transition: all ease-in-out 0.3s;
   padding: 15px;
@@ -53,18 +56,18 @@ li {
   background-color: ${({ theme }) => theme.background.optionsdiv};
   color: ${({ theme }) => theme.color.main};
   border: none;
+
+  &:active,
+  &:hover {
+    border: 2px solid #a729f5;
+  }
 }
 
 
-li:active{
-    color:${({theme}) => theme.color.spanActive};
-    border:2px solid  #A729F5;
-}
-li: hover{
-  border:2px solid  #A729F5;
-}
 
-li.correct {
+
+
+li.correct  {
   position: relative;
   border: 2px solid  ${({ theme }) => theme.border.correctEffect};
   
@@ -79,7 +82,7 @@ li.correct picture{
   left:90%;
   background-repeat:no-repeat;
   background-size:cover;
-  background-image: url(${({theme}) => theme.backgroundimg.correctEffect});
+  background-image: url(${({ theme }) => theme.backgroundimg.correctEffect});
 }
 li.wrong picture{
   left:90%;
@@ -87,7 +90,7 @@ li.wrong picture{
   position: absolute;
   background-repeat:no-repeat;
   background-size:cover;
-  background-image: url(${({theme}) => theme.backgroundimg.wrongEffect});
+  background-image: url(${({ theme }) => theme.backgroundimg.wrongEffect});
 }
 
 li.wrong {
@@ -115,8 +118,8 @@ span:hover{
   background-color: ${({ theme }) => theme.background.spanHover};
 }
 span:active{
-color:${({theme}) => theme.color.spanActive};
-background-color:${({theme}) => theme.background.spanActive};
+color:${({ theme }) => theme.color.spanActive};
+background-color:${({ theme }) => theme.background.spanActive};
 }
 
 Button{
@@ -181,14 +184,14 @@ ul .bottomWrong picture{
     
     width:50px;
     background-repeat:no-repeat;
-    background-image: url(${({theme}) => theme.backgroundimg.sunimgcolor});
+    background-image: url(${({ theme }) => theme.backgroundimg.sunimgcolor});
   }
   .toglleContainer .moonImage{
     margin-left:25px;
     padding-bottom:6px;
     width:60px;
     background-repeat:no-repeat;
-    background-image: url(${({theme}) => theme.backgroundimg.moonimgcolor});
+    background-image: url(${({ theme }) => theme.backgroundimg.moonimgcolor});
   }
   
 
@@ -251,20 +254,16 @@ ul .bottomWrong picture{
  
 `;
 
-
-
 export const StyledApp = styled.div``;
 
-
 export const Accesibilty = styled.div`
-gap:24px;
-display:flex;
-align-items: center;
-justify-content: center;
+  gap: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-
- /* h1 {
+/* h1 {
     font-family: 'Roboto Slab', serif;
     font-weight: 700;
     font-size: 32px;
@@ -368,6 +367,3 @@ justify-content: center;
     line-height: 24px;
     color: ${({ theme }:ThemeProps) => theme.color.code};;
   }*/
-
-
-

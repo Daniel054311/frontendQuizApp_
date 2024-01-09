@@ -12,12 +12,13 @@ grid-template-columns: 1fr  1fr;
 padding: 2% 7%;
 grid-gap: 20%;
 font-family: 'Rubik', sans-serif;
-
     @media  screen and (max-width: 900px){
       grid-template-columns:  1fr; 
       gap:10%;
       
    }
+
+   
 `;
 export const LeftContainer = styled.div<LeftContainerProps>`
 position:relative;

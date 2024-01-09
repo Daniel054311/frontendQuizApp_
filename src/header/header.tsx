@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import { themes } from "../themes/Themes";
 import { Accesibilty, GlobalStyle, StyledApp } from "./header.styles";
+
+
+
 
 
 
@@ -8,7 +12,22 @@ import { Accesibilty, GlobalStyle, StyledApp } from "./header.styles";
 const Header: React.FC<{ title: string ,icon:string}> = (props) => {
 
 
-  const [isDarkMode,setIsDarkMode] = useState(false);
+  // const {theme,handleThemeChange} = useContext(ThemeContext)
+  // const [checked,setChecked] = useState(false)
+
+  // const handleChangeBackgroundColor = (event:ChangeEvent<HTMLInputElement>) => {
+  //  setChecked(event.target.checked)
+  //   handleThemeChange()
+  // }
+
+  const [isDarkMode,setIsDarkMode] = useState(
+    localStorage.getItem("isDarkMode") === "true"
+  );
+
+  useEffect(()=>{
+    // save the current state to local storage whenever it change
+    localStorage.setItem("isDarkMode",String(isDarkMode))
+  },[isDarkMode])
  
   const handleChangeBackgroundColor = () =>{
     setIsDarkMode(!isDarkMode);
@@ -19,9 +38,11 @@ const Header: React.FC<{ title: string ,icon:string}> = (props) => {
  
     return (
     <>
-    <GlobalStyle theme={isDarkMode ? themes.dark : themes.light} />
+  <GlobalStyle theme={isDarkMode ? themes.dark : themes.light} />
    
-          
+     
+
+
           <div className="darkModeContainer">
             <Accesibilty>
             <img src={props.icon} alt={props.title} />
@@ -33,7 +54,7 @@ const Header: React.FC<{ title: string ,icon:string}> = (props) => {
            
             <div className="sunImage" ><img src="" alt="" /></div>
             <label className="switch">
-              <input type="checkbox" checked={isDarkMode}  onChange={handleChangeBackgroundColor}/>
+              <input type="checkbox"  checked={isDarkMode}  onChange={handleChangeBackgroundColor}/>
               <div className="slider round"></div>
             </label>
             <div className="moonImage"><img src="" alt="" /></div>

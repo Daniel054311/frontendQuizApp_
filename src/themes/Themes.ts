@@ -35,6 +35,7 @@ export interface Theme extends DefaultTheme {
   border: {
     correctEffect: string;
     wrongEffect: string;
+    spanActive: string;
   }
 }
 export interface Themes {
@@ -74,6 +75,7 @@ export const themes: Themes = {
     border: {
       wrongEffect: "#EE5454",
       correctEffect: "#26D782",
+      spanActive:" #A729F5",
     },
    
   },
@@ -107,6 +109,7 @@ export const themes: Themes = {
     border: {
       wrongEffect: "#EE5454",
       correctEffect: "#26D782",
+      spanActive:" #A729F5",
     },
    
   },

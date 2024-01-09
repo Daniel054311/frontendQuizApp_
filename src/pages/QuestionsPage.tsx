@@ -64,7 +64,7 @@ const QuestionsPage: React.FC = () => {
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [trackerWidth, setTrackerWidth] = useState<number>(0);
-
+const [answerStatus,setAnswerStatus] = useState<string | null>(null)
   // const handleOptionClick = (selectedOption: string) => {
   //   const currentQuestion = questions[currentQuestionIndex];
 
@@ -93,6 +93,9 @@ const QuestionsPage: React.FC = () => {
   
       if (selectedOption === currentQuestion.answer) {
         setCorrectMarks((prevMarks) => prevMarks + 1);
+        // setAnswerStatus("correct")
+      }else{
+        // setAnswerStatus("wrong")
       }
     }
     setOptionSelected(true);
@@ -112,7 +115,7 @@ const QuestionsPage: React.FC = () => {
   const handleNextQuestion = () => {
     if (currentQuestionIndex === TOTAL_QUESTIONS) {
       setGameOver(true);
-    } else {
+    } 
       if (optionSelected) {
         setOptionSelected(false);
         setButtonClicked(false); 
@@ -123,7 +126,7 @@ const QuestionsPage: React.FC = () => {
       } else {
         setButtonClicked(true); // Set buttonClicked to true when no option is selected
       }
-    }
+    
   };
 
 // onkeypress
@@ -165,11 +168,13 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
             <p>{` ${currentQuestion.question}`}</p>
             </div>
 
-            <li className="sliderContainer" style={{padding:"3px"}}>
+            <li className="sliderContainer" style={{padding:"3px",width:"100%"}}>
               <div className="sliderTracker"></div>
               </li>
               
           </LeftContainer>
+
+          
           <ul>
             {currentQuestion.options.map((option, index) => (
               <li
@@ -177,13 +182,16 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
                 onClick={() => handleOptionClick(option)}
                 className={`
             ${
-              selectedOption !== null &&
+              selectedOption !== null &&  // change back to the defULT WHICH IS "&&"
               (selectedOption === option
                 ? option === currentQuestion.answer
                   ? "correct"
                   : "wrong"
                 : "")
-            }`}
+            }
+            
+            
+            `}
               >
                 <span className="alphabet">{alphabet[index]}</span>
                 <div className="option">{option} </div>
