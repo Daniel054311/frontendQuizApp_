@@ -64,7 +64,7 @@ const QuestionsPage: React.FC = () => {
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [trackerWidth, setTrackerWidth] = useState<number>(0);
-const [answerStatus,setAnswerStatus] = useState<string | null>(null)
+
   // const handleOptionClick = (selectedOption: string) => {
   //   const currentQuestion = questions[currentQuestionIndex];
 
