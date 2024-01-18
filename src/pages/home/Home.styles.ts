@@ -7,7 +7,7 @@ export const HomeWrapper = styled.div`
 font-family: 'Rubik', sans-serif;
 display: grid;
 grid-template-columns: 1fr  1fr; 
-padding: 2% 7%;
+padding: 0 7%;
 
 
     @media  screen and (max-width: 900px){
@@ -40,7 +40,7 @@ gap:8px;
 
 `;
 export const ItalicP = styled.p`
-font-size:20px;
+   font-size:1.25rem;
    font-style: italic;
 `; 
 
@@ -54,9 +54,8 @@ export const TitlesDiv = styled.div`
 
 
 export const Optionsdiv = styled.div`
-ul .courseTitle: hover{
-   transition: all ease-in-out 0.3s;
-   border:2px solid  #A729F5;
+.courseTitle: hover{
+  
  }
 `;
 

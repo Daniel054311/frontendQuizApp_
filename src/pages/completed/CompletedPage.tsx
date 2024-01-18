@@ -37,12 +37,12 @@ export const CompletedPage: React.FC<{
   return (
     <HomeWrapper >
       <div>
-        <p>Quiz Completed</p>
-        <h2>You scored...</h2>
+        <p style={{fontSize:'4rem'}}>Quiz Completed</p>
+        <h2 style={{fontSize:'4rem'}}>You scored...</h2>
       </div>
 
       <ul >
-        <li style={{ justifyContent: "center", border: "none", cursor: "default" }} >
+        <li style={{ justifyContent: "center", outline: "none", cursor: "default" }} >
           <ScoredContainer>
             <Accesibilty>
               <img src={props.icon} alt={props.title} />

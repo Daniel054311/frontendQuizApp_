@@ -8,10 +8,12 @@ interface LeftContainerProps {
  
 export const QPageWrapper = styled.div`
 display: grid;
-grid-template-columns: 1fr  1fr; 
-padding: 2% 7%;
+grid-template-columns: 1fr  1fr ; 
+margin: 2vh 7%;
 grid-gap: 20%;
 font-family: 'Rubik', sans-serif;
+position:relative;
+
     @media  screen and (max-width: 900px){
       grid-template-columns:  1fr; 
       gap:10%;
@@ -22,16 +24,18 @@ font-family: 'Rubik', sans-serif;
 `;
 export const LeftContainer = styled.div<LeftContainerProps>`
 position:relative;
+display:flex;
+flex-direction:column;
+justify-content: space-between;
 transition: all ease-in-out 0.3s;
+
+
 .sliderContainer{
-   position:absolute;
-  bottom:12%;
+  width:auto;
    display:flex;
-   position:absolute;
    align-items:center;
-
-   
-
+   position:absolute;
+   bottom:20px;
 }
 
 .sliderContainer .sliderTracker {
@@ -44,3 +48,17 @@ transition: all ease-in-out 0.3s;
 }
 `;
 
+export const RightContainer = styled.div`
+display:flex;
+flex-direction:column;
+justify-content:center;
+gap: 3vh;
+.bottomWrong{
+   display: flex;
+   justify-content:center;
+   align-items:center;
+   gap:5px;
+   bottom:-50px;
+ }
+
+`;

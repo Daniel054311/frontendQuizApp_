@@ -47,8 +47,8 @@ const Home: React.FC = () =>{
 <div className="leftContainer left-align">
 
 <div className='welcomeTitle'>
-<p >Welcome to the</p>
-<h2>Frontend Quiz!</h2>
+<p style={{fontSize:'4rem'}}>Welcome to the</p>
+<h2 style={{fontSize:'4rem'}}>Frontend Quiz!</h2>
 </div>
 
 <ItalicP className='getStarted'>Pick a subject to get started.</ItalicP>
@@ -65,7 +65,7 @@ const Home: React.FC = () =>{
       {/* Assuming questionId should start from 1 */}
       <li key={quiz.id}  className='courseTitle' >
        
-          <img src={quiz.icon} alt={quiz.title} style={{ width: '10%', backgroundColor: backgroundColors[index % backgroundColors.length] }}/>
+          <img src={quiz.icon} alt={quiz.title} style={{ width: '7 %', backgroundColor: backgroundColors[index % backgroundColors.length] }}/>
         
         <TitlesDiv>
         {quiz.title}

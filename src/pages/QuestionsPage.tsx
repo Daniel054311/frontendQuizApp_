@@ -9,6 +9,7 @@ import Header from "../header/header";
 import {
   LeftContainer,
   QPageWrapper,
+  RightContainer,
  
 } from "./QuetionsPage.styles";
 import { CompletedPage } from "./completed/CompletedPage";
@@ -85,7 +86,6 @@ const QuestionsPage: React.FC = () => {
       // User has already made a choice, ignore the click
       return;
     }
-  
     const currentQuestion = questions[currentQuestionIndex];
   
     if (currentQuestion) {
@@ -141,9 +141,6 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
         setButtonClicked(true);
       }
       break;
-
-
-
     default:
       
       break;
@@ -159,7 +156,8 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
       <Header title={quizTitle} icon={quizIcon} />
       {!gameOver && currentQuestion ? (
         <QPageWrapper>
-          <LeftContainer  trackerwidth={trackerWidth}>
+          <LeftContainer  trackerwidth={trackerWidth} style={{height:'26rem'}}>
+            <div>
             <ItalicP style={{marginBottom:"28px"}}>
               Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}
             </ItalicP>
@@ -167,14 +165,18 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
             <div style={{marginBottom:"15%"}}>
             <p>{` ${currentQuestion.question}`}</p>
             </div>
-
-            <li className="sliderContainer" style={{padding:"3px",width:"100%"}}>
+            </div>
+            
+            <li className="sliderContainer" style={{padding:"3px",width:"100%",outline:'none',cursor:'default'}}>
               <div className="sliderTracker"></div>
               </li>
-              
+          
           </LeftContainer>
 
-          
+
+          <RightContainer>
+
+            <div>
           <ul>
             {currentQuestion.options.map((option, index) => (
               <li
@@ -201,8 +203,12 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
               </li>
             ))}
             <button onClick={handleNextQuestion}>Submit Answer</button>
-
-            {buttonClicked && !optionSelected && (
+          </ul>
+          </div>
+            
+            <div>
+          <ul>
+          {buttonClicked && !optionSelected && (
               <div className="bottomWrong">
                 <picture style={{ width: "20px", height: "20px" }}>
                   <img src="" alt="" />
@@ -211,9 +217,11 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
                 <p >Please select an answer</p>
                 </div>
               </div>
- 
             )}
-          </ul>
+            </ul>
+            </div>
+          </RightContainer>
+
         </QPageWrapper>
       ) : (
         <CompletedPage

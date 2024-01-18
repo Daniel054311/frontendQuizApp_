@@ -2,24 +2,24 @@ import styled, { createGlobalStyle, DefaultTheme } from "styled-components";
 import { Theme } from "../themes/Themes";
 
 export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme & Theme }>`
-  * {
-    margin: 0px;
-    padding: 0px;
-    
-    
-  }
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0px;
+  box-sizing: border-box;
+}
   body {
     font-family: 'Rubik', sans-serif;
     background-repeat:no-repeat;
     background-size:cover;
-    overflow: scroll;
     background-image: url(${({ theme }) => theme.backgroundimg.main});
     background-color: ${({ theme }) => theme.background.main};
     color: ${({ theme }) => theme.color.main};
   }
 
   h2{ 
-    font-size:5rem;
+    font-size:4rem;
  }
   p{
     font-size:2rem;
@@ -33,9 +33,8 @@ ul{
   display:flex;
    justify-content:center;
    flex-direction:column;
-   gap:12px;
+   gap:20px;
  
-
 }
 
 img{
@@ -45,21 +44,20 @@ img{
 
 li {
 
-  cursor: pointer;
   display: flex;
-  align-items: center;
   width: auto;
-  gap: 8%;
-  transition: all ease-in-out 0.3s;
-  padding: 15px;
-  border-radius: 24px;
+  align-items: center;
+  gap: 3vh;
+  cursor: pointer;
+  padding: 2vh;
+  border-radius: 20px;
   background-color: ${({ theme }) => theme.background.optionsdiv};
   color: ${({ theme }) => theme.color.main};
   border: none;
 
   &:active,
   &:hover {
-    border: 2px solid #a729f5;
+    outline: 2px solid #a729f5;
   }
 }
 
@@ -69,11 +67,12 @@ li {
 
 li.correct  {
   position: relative;
-  border: 2px solid  ${({ theme }) => theme.border.correctEffect};
+  outline: 2px solid  ${({ theme }) => theme.border.correctEffect};
   
 }
 .correct span{
   background-color: ${({ theme }) => theme.border.correctEffect};
+  color:white;
 }
 
 li.correct picture{
@@ -95,10 +94,11 @@ li.wrong picture{
 
 li.wrong {
   position: relative;
-  border: 2px solid ${({ theme }) => theme.border.wrongEffect};
+  outline: 2px solid ${({ theme }) => theme.border.wrongEffect};
 }
 
 .wrong span {
+  color:white;
   background-color: ${({ theme }) => theme.border.wrongEffect};
 }
 
@@ -126,10 +126,11 @@ Button{
 font-family: 'Rubik', sans-serif;
 cursor:pointer;
 border:none;
+width:auto;
 font-size:28px;
-padding:20px;
+padding: 2vh;
 transition: all ease-in-out 0.3s;
-border-radius:24px;
+border-radius: 20px;
 background-color: ${({ theme }) => theme.background.Buttons};
 color: ${({ theme }) => theme.color.Buttons};
 }
@@ -137,22 +138,13 @@ Button:hover{
   opacity: 0.6;
 }
 
-ul .bottomWrong{
-  display: flex;
-  justify-content:center;
-  flex-direction:row;
-}
-
 ul .bottomWrong p{
-  font-size:20px;
+  font-size:1.25rem;
   color: ${({ theme }) => theme.color.wongColor};
 }
 
 
 ul .bottomWrong picture{
-  z-index: 5;
-  left:63%;
-  position: absolute;
   background-repeat:no-repeat;
   background-size:cover;
   background-image: url(${({ theme }) => theme.backgroundimg.wrongEffect});
@@ -166,14 +158,14 @@ ul .bottomWrong picture{
 
   .darkModeContainer {
     display: flex;
-    padding:50px 7%;
+    margin:5vh 7%;
     align-items: center;
     justify-content: space-between;
+  
   }
   
   
   .darkModeContainer .toglleContainer{
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,14 +174,14 @@ ul .bottomWrong picture{
 
   .toglleContainer .sunImage{
     
-    width:50px;
+    padding-left:50px;
     background-repeat:no-repeat;
     background-image: url(${({ theme }) => theme.backgroundimg.sunimgcolor});
   }
   .toglleContainer .moonImage{
     margin-left:25px;
     padding-bottom:6px;
-    width:60px;
+    padding-left:20px;
     background-repeat:no-repeat;
     background-image: url(${({ theme }) => theme.backgroundimg.moonimgcolor});
   }
