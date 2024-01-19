@@ -65,7 +65,7 @@ const Home: React.FC = () =>{
       {/* Assuming questionId should start from 1 */}
       <li key={quiz.id}  className='courseTitle' >
        
-          <img src={quiz.icon} alt={quiz.title} style={{ width: '50px', height:"50px", backgroundColor: backgroundColors[index % backgroundColors.length] }}/>
+          <img src={quiz.icon} alt={quiz.title} style={{ width: '45px', height:"45px", backgroundColor: backgroundColors[index % backgroundColors.length] }}/>
         
         <TitlesDiv>
         {quiz.title}

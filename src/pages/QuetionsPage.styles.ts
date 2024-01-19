@@ -16,7 +16,7 @@ position:relative;
 
     @media  screen and (max-width: 900px){
       grid-template-columns:  1fr; 
-      gap:10%;
+      gap:5%;
       
    }
 
@@ -46,6 +46,14 @@ transition: all ease-in-out 0.3s;
    width: ${({ trackerwidth }) => `${trackerwidth}%`};
    background-color: #A729F5;
 }
+
+@media  screen and (max-width: 900px){
+   .sliderContainer{
+      bottom:2%;
+    }
+   
+}
+
 `;
 
 export const RightContainer = styled.div`

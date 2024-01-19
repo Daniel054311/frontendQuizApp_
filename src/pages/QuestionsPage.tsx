@@ -24,11 +24,8 @@ const QuestionsPage: React.FC = () => {
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [trackerWidth, setTrackerWidth] = useState<number>(0);
-  const [color, setColor] = useState<string>();
   const [buttonText, setButtonText] = useState<string>("Submit Answer");
   const alphabet = ["A", "B", "C", "D"];
-  const [markedAnswers, setMarkedAnswers] = useState<string[]>([]);
-
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [optionsDisabled, setOptionsDisabled] = useState<boolean>(false);
 
@@ -36,62 +33,48 @@ const QuestionsPage: React.FC = () => {
 
   const handleOptionClick = (selectedOption: string) => {
     const currentQuestion = questions[currentQuestionIndex];
-  
+
     if (currentQuestion) {
       setSelectedOption(selectedOption);
-  
+
       if (selectedOption === currentQuestion.answer) {
         setCorrectMarks((prevMarks) => prevMarks + 1);
         setIsCorrect(true);
       } else {
         setIsCorrect(false);
       }
-  
+
       setOptionSelected(true);
       setOptionsDisabled(true);
     }
-
   };
-  
-  
 
-  
   const next = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     setTrackerWidth((prevWidth) => prevWidth + 10);
   };
 
   const handleNextQuestion = () => {
-
-
     if (currentQuestionIndex === questions.length - 1) {
       setGameOver(true);
     } else {
       if (optionSelected || optionsDisabled) {
         // Mark the answer before moving to the next question
-        setMarkedAnswers((prevAnswers) => [
-          ...prevAnswers,
-          selectedOption === currentQuestion.answer ? "correct" : "wrong",
-        ]);
+       
         setOptionSelected(true);
 
         if (selectedOption === currentQuestion.answer) {
-        
           setIsCorrect(true);
         } else if (selectedOption !== currentQuestion.answer) {
           setIsCorrect(false);
           //already true
-         
         }
         setButtonText("Next Question");
-
-      
 
         if (
           buttonText === "Next Question" &&
           currentQuestionIndex !== questions.length - 1
         ) {
-         
           next();
           setButtonText("Submit Answer");
           setOptionsDisabled(false);
@@ -159,11 +142,8 @@ const QuestionsPage: React.FC = () => {
 
   return (
     <div onKeyDown={handleKeyDown} tabIndex={0}>
-      <Header title={quizTitle} icon={quizIcon}  />
+      <Header title={quizTitle} icon={quizIcon} />
 
-
-
-      
       {!gameOver && currentQuestion ? (
         <QPageWrapper>
           <LeftContainer
@@ -200,17 +180,17 @@ const QuestionsPage: React.FC = () => {
                   <li
                     key={index}
                     onClick={() =>
-                      buttonText === "Next Question" ? null : handleOptionClick(option)
+                      buttonText === "Next Question"
+                        ? null
+                        : handleOptionClick(option)
                     }
                     style={{
                       outline:
                         optionSelected && selectedOption === option
                           ? "2px solid #a729f5"
                           : "",
-                         
                     }}
                     className={`alphabet ${
-                     
                       buttonText === "Submit Answer"
                         ? ""
                         : selectedOption === option
@@ -246,7 +226,7 @@ const QuestionsPage: React.FC = () => {
                       style={{
                         backgroundColor:
                           optionSelected && selectedOption === option
-                          ? buttonText !== "Next Question"
+                            ? buttonText !== "Next Question"
                               ? " #a729f5"
                               : ""
                             : "",
@@ -254,8 +234,7 @@ const QuestionsPage: React.FC = () => {
                         color:
                           optionSelected &&
                           selectedOption === option &&
-                          buttonText !== "Next Question" 
-                         
+                          buttonText !== "Next Question"
                             ? "#fff"
                             : "",
                       }}

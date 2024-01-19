@@ -83,7 +83,7 @@ li.wrong {
 
 li.correct picture{
   z-index: 5;
-  position: fixed;
+  position: absolute;
   left:90%;
   background-repeat:no-repeat;
   background-size:cover;
@@ -92,7 +92,7 @@ li.correct picture{
 li.wrong picture{
   left:90%;
   z-index: 5;
-  position: fixed;
+  position: absolute;
   background-repeat:no-repeat;
   background-size:cover;
   background-image: url(${({ theme }) => theme.backgroundimg.wrongEffect});
@@ -112,8 +112,8 @@ align-items:center;
 border-radius:7px;
 color:#313E51;
 background-color:#F4F6FA;
-width: 50px;
-height: 50px;
+width: 45px;
+height: 45px;
 }
 span:hover{
   color: ${({ theme }) => theme.color.spanHover};
