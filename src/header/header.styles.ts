@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme & Theme }>`
     font-family: 'Rubik', sans-serif;
     background-repeat:no-repeat;
     background-size:cover;
+    font-weight: 500;
     background-image: url(${({ theme }) => theme.backgroundimg.main});
     background-color: ${({ theme }) => theme.background.main};
     color: ${({ theme }) => theme.color.main};
