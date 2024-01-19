@@ -35,7 +35,7 @@ transition: all ease-in-out 0.3s;
    display:flex;
    align-items:center;
    position:absolute;
-   bottom:10%;
+   bottom:5%;
 }
 
 .sliderContainer .sliderTracker {
