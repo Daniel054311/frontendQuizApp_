@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const ScoredContainer = styled.div`
-padding:15vh;
+padding:15%;
 display:flex;
 align-items:center;
 justify-content:center;
