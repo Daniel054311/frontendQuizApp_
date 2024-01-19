@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {  GetStarted, HomeWrapper, ItalicP, Optionsdiv, TitlesDiv, } from './Home.styles';
-import { QetQuizData } from '../../services/Questionsdata';
+import { getQuizData } from '../../services/Questionsdata';
 import {QuizData} from '../../services/QuizTypes';
 import { Link } from 'react-router-dom';
 import Header from '../../header/header';
@@ -13,7 +13,7 @@ const Home: React.FC = () =>{
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedQuizzes:QuizData[] = await QetQuizData();
+        const fetchedQuizzes:QuizData[] = await getQuizData();
         //console.log(fetchedQuizzes);
 
         if(fetchedQuizzes){
@@ -65,7 +65,7 @@ const Home: React.FC = () =>{
       {/* Assuming questionId should start from 1 */}
       <li key={quiz.id}  className='courseTitle' >
        
-          <img src={quiz.icon} alt={quiz.title} style={{ width: '7 %', backgroundColor: backgroundColors[index % backgroundColors.length] }}/>
+          <img src={quiz.icon} alt={quiz.title} style={{ width: '50px', height:"50px", backgroundColor: backgroundColors[index % backgroundColors.length] }}/>
         
         <TitlesDiv>
         {quiz.title}

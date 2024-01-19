@@ -1,5 +1,5 @@
 
-export async function QetQuizData() {
+export async function getQuizData() {
   try {
     const res = await fetch("/data.json");
     if (!res.ok) throw new Error("Failed in getting quiz");

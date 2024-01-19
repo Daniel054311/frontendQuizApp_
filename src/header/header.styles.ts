@@ -68,8 +68,14 @@ li {
 li.correct  {
   position: relative;
   outline: 2px solid  ${({ theme }) => theme.border.correctEffect};
-  
+
 }
+
+li.wrong {
+  position: relative;
+  outline: 2px solid ${({ theme }) => theme.border.wrongEffect};
+}
+
 .correct span{
   background-color: ${({ theme }) => theme.border.correctEffect};
   color:white;
@@ -77,7 +83,7 @@ li.correct  {
 
 li.correct picture{
   z-index: 5;
-  position: absolute;
+  position: fixed;
   left:90%;
   background-repeat:no-repeat;
   background-size:cover;
@@ -86,16 +92,12 @@ li.correct picture{
 li.wrong picture{
   left:90%;
   z-index: 5;
-  position: absolute;
+  position: fixed;
   background-repeat:no-repeat;
   background-size:cover;
   background-image: url(${({ theme }) => theme.backgroundimg.wrongEffect});
 }
 
-li.wrong {
-  position: relative;
-  outline: 2px solid ${({ theme }) => theme.border.wrongEffect};
-}
 
 .wrong span {
   color:white;
@@ -110,8 +112,8 @@ align-items:center;
 border-radius:7px;
 color:#313E51;
 background-color:#F4F6FA;
-height:40px;
-width:40px;
+width: 50px;
+height: 50px;
 }
 span:hover{
   color: ${({ theme }) => theme.color.spanHover};

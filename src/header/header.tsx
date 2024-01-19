@@ -12,13 +12,7 @@ import { Accesibilty, GlobalStyle, StyledApp } from "./header.styles";
 const Header: React.FC<{ title: string ,icon:string}> = (props) => {
 
 
-  // const {theme,handleThemeChange} = useContext(ThemeContext)
-  // const [checked,setChecked] = useState(false)
 
-  // const handleChangeBackgroundColor = (event:ChangeEvent<HTMLInputElement>) => {
-  //  setChecked(event.target.checked)
-  //   handleThemeChange()
-  // }
 
   const [isDarkMode,setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
@@ -45,7 +39,21 @@ const Header: React.FC<{ title: string ,icon:string}> = (props) => {
 
           <div className="darkModeContainer">
             <Accesibilty>
-            <img src={props.icon} alt={props.title} />
+            <img src={props.icon} alt={props.title}
+             style={{
+              backgroundColor:
+              props.title === "HTML"
+                  ? "#FFF1E9"
+                  : props.title === "CSS"
+                  ? "#E0FDEF"
+                  : props.title === "Accessibility"
+                  ? "#F6E7FF"
+                  : props.title === "JavaScript"
+                  ? "#EBF0FF"
+                  : "transparent",
+            }}
+             />
+
               <p style={{fontSize:"28px"}}>{props.title}</p>
             </Accesibilty>
 
