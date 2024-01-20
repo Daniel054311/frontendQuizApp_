@@ -50,9 +50,7 @@ const QuestionsPage: React.FC = () => {
 
       if (selectedOption === currentQuestion.answer) {
         setCorrectMarks((prevMarks) => prevMarks + 1);
-     
-      } 
-
+      }
       setOptionSelected(true);
       setOptionsDisabled(true);
     }
@@ -204,7 +202,12 @@ const QuestionsPage: React.FC = () => {
                     }`}
                   >
                     <span
-                 className="alphabet"
+                  className={` ${
+                   buttonText !== NEXT_QUESTION
+                    ? "alphabet"
+                    : ""
+                 
+                  }`}
                     
                       style={{
                         backgroundColor:

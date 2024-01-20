@@ -111,18 +111,18 @@ background-color:#F4F6FA;
 width: 45px;
 height: 45px;
 }
-.alphabet:hover{
+li:hover .alphabet{
   color: ${({ theme }) => theme.color.spanHover};
   background-color: ${({ theme }) => theme.background.spanHover};
 }
 
 
-.correct .alphabet:hover{
+li:hover .correct .alphabet{
   color:white;
   background-color: ${({ theme }) => theme.background.correctEffect};
 }
 
-.wrong .alphabet:hover{
+li:hover .wrong .alphabet{
   color:white;
   background-color: ${({ theme }) => theme.background.wrongEffect};
 }
