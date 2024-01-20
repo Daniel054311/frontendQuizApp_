@@ -62,11 +62,9 @@ li {
   }
 }
 
-
 li.correct  {
   position: relative;
   outline: 2px solid  ${({ theme }) => theme.border.correctEffect};
-
 }
 
 li.wrong {

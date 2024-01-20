@@ -31,7 +31,7 @@ const QuestionsPage: React.FC = () => {
   const [buttonText, setButtonText] = useState<string>(SUBMIT_ANSWER);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [optionsDisabled, setOptionsDisabled] = useState<boolean>(false);
-  const [isHovered, setIsHovered] = useState(false);
+
 
 
   const generateAlphabet = (length: number) => {
