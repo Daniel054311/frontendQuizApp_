@@ -14,6 +14,10 @@ import { ItalicP } from "./home/Home.styles";
 const QuestionsPage: React.FC = () => {
   const { quizId } = useParams<any>();
 
+  // Declaring the button text constants
+  const SUBMIT_ANSWER = "Submit Answer";
+  const NEXT_QUESTION = "Next Question";
+
   const [questions, setQuestions] = useState<QuizData["questions"]>([]);
   const [quizTitle, setQuizTitle] = useState<string>("");
   const [quizIcon, setQuizIcon] = useState<string>("");
@@ -24,12 +28,19 @@ const QuestionsPage: React.FC = () => {
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [trackerWidth, setTrackerWidth] = useState<number>(0);
-  const [buttonText, setButtonText] = useState<string>("Submit Answer");
-  const alphabet = ["A", "B", "C", "D"];
+  const [buttonText, setButtonText] = useState<string>(SUBMIT_ANSWER);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [optionsDisabled, setOptionsDisabled] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // null -not marked
+
+  const generateAlphabet = (length: number) => {
+    return Array.from({ length }, (_, index) =>
+      String.fromCharCode("A".charCodeAt(0) + index)
+    );
+  };
+
+  const alphabet = generateAlphabet(questions.length);
 
   const handleOptionClick = (selectedOption: string) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -39,10 +50,8 @@ const QuestionsPage: React.FC = () => {
 
       if (selectedOption === currentQuestion.answer) {
         setCorrectMarks((prevMarks) => prevMarks + 1);
-        setIsCorrect(true);
-      } else {
-        setIsCorrect(false);
-      }
+     
+      } 
 
       setOptionSelected(true);
       setOptionsDisabled(true);
@@ -59,38 +68,24 @@ const QuestionsPage: React.FC = () => {
       setGameOver(true);
     } else {
       if (optionSelected || optionsDisabled) {
-        // Mark the answer before moving to the next question
-       
         setOptionSelected(true);
 
         if (selectedOption === currentQuestion.answer) {
           setIsCorrect(true);
-        } else if (selectedOption !== currentQuestion.answer) {
+        } else {
           setIsCorrect(false);
-          //already true
         }
-        setButtonText("Next Question");
 
-        if (
-          buttonText === "Next Question" &&
-          currentQuestionIndex !== questions.length - 1
-        ) {
+        setButtonText(NEXT_QUESTION);
+
+        if (buttonText === NEXT_QUESTION) {
           next();
-          setButtonText("Submit Answer");
+          setButtonText(SUBMIT_ANSWER);
           setOptionsDisabled(false);
-        }
-
-        if (buttonText !== "Submit Answer" && isCorrect == true) {
-          setIsCorrect(true);
-        }
-        if (buttonText !== "Submit Answer" && isCorrect == false) {
-          setIsCorrect(false);
         }
 
         setOptionSelected(false);
         setButtonClicked(false);
-
-        // setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       } else {
         setButtonClicked(true);
       }
@@ -100,17 +95,22 @@ const QuestionsPage: React.FC = () => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     switch (event.key) {
       case "Enter":
-        if (optionSelected) {
-          handleOptionClick(selectedOption!);
-          handleNextQuestion();
-        } else {
-          setButtonClicked(true);
+        if (buttonText === SUBMIT_ANSWER) {
+          if (optionSelected) {
+            handleNextQuestion();
+          } else {
+            setButtonClicked(true);
+          }
+        } else if (buttonText === NEXT_QUESTION) {
+          next();
+          setButtonText(SUBMIT_ANSWER);
         }
         break;
       default:
         break;
     }
   };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -141,9 +141,9 @@ const QuestionsPage: React.FC = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div onKeyDown={handleKeyDown} tabIndex={0}>
+    <div >
       <Header title={quizTitle} icon={quizIcon} />
-
+   
       {!gameOver && currentQuestion ? (
         <QPageWrapper>
           <LeftContainer
@@ -177,10 +177,12 @@ const QuestionsPage: React.FC = () => {
             <div>
               <ul>
                 {currentQuestion.options.map((option, index) => (
-                  <li
+                  <li onKeyDown={handleKeyDown} tabIndex={0}
+
+                  
                     key={index}
                     onClick={() =>
-                      buttonText === "Next Question"
+                      buttonText === NEXT_QUESTION
                         ? null
                         : handleOptionClick(option)
                     }
@@ -190,43 +192,24 @@ const QuestionsPage: React.FC = () => {
                           ? "2px solid #a729f5"
                           : "",
                     }}
-                    className={`alphabet ${
-                      buttonText === "Submit Answer"
+                    className={` ${
+                      buttonText === SUBMIT_ANSWER
                         ? ""
                         : selectedOption === option
-                        ? isCorrect !== null
                           ? isCorrect
                             ? "correct"
                             : "wrong"
                           : ""
-                        : ""
+                      
                     }`}
-                    //         className={`
-                    // ${
-                    //   selectedOption !== null &&  // change back to the defULT WHICH IS "&&"
-                    //   (selectedOption === option
-                    //     ? option === currentQuestion.answer
-                    //       ? "correct"
-                    //       : "wrong"
-                    //     : "")
-                    // }
-
-                    // `}
                   >
                     <span
-                      className={`alphabet ${
-                        selectedOption === option
-                          ? isCorrect !== null
-                            ? isCorrect
-                              ? ""
-                              : ""
-                            : ""
-                          : ""
-                      }`}
+                 className="alphabet"
+                    
                       style={{
                         backgroundColor:
                           optionSelected && selectedOption === option
-                            ? buttonText !== "Next Question"
+                            ? buttonText !== NEXT_QUESTION
                               ? " #a729f5"
                               : ""
                             : "",
@@ -234,7 +217,7 @@ const QuestionsPage: React.FC = () => {
                         color:
                           optionSelected &&
                           selectedOption === option &&
-                          buttonText !== "Next Question"
+                          buttonText !== NEXT_QUESTION
                             ? "#fff"
                             : "",
                       }}
@@ -247,8 +230,15 @@ const QuestionsPage: React.FC = () => {
                     </picture>
                   </li>
                 ))}
-                <button
+                <button 
+                 type="button"
                   onClick={handleNextQuestion}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleNextQuestion();
+                    }
+                  }}
                   style={{
                     marginTop: "10px",
                   }}
@@ -262,7 +252,7 @@ const QuestionsPage: React.FC = () => {
               <ul>
                 {buttonClicked &&
                   !optionSelected &&
-                  buttonText !== "Next Question" &&
+                  buttonText !== NEXT_QUESTION &&
                   !optionsDisabled && (
                     <div className="bottomWrong">
                       <picture style={{ width: "20px", height: "20px" }}>

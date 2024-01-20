@@ -63,9 +63,6 @@ li {
 }
 
 
-
-
-
 li.correct  {
   position: relative;
   outline: 2px solid  ${({ theme }) => theme.border.correctEffect};
@@ -78,7 +75,7 @@ li.wrong {
 }
 
 .correct span{
-  background-color: ${({ theme }) => theme.border.correctEffect};
+  background-color: ${({ theme }) => theme.background.correctEffect};
   color:white;
 }
 
@@ -102,7 +99,7 @@ li.wrong picture{
 
 .wrong span {
   color:white;
-  background-color: ${({ theme }) => theme.border.wrongEffect};
+  background-color: ${({ theme }) => theme.background.wrongEffect};
 }
 
 
@@ -116,14 +113,22 @@ background-color:#F4F6FA;
 width: 45px;
 height: 45px;
 }
-span:hover{
+.alphabet:hover{
   color: ${({ theme }) => theme.color.spanHover};
   background-color: ${({ theme }) => theme.background.spanHover};
 }
-span:active{
-color:${({ theme }) => theme.color.spanActive};
-background-color:${({ theme }) => theme.background.spanActive};
+
+
+.correct .alphabet:hover{
+  color:white;
+  background-color: ${({ theme }) => theme.background.correctEffect};
 }
+
+.wrong .alphabet:hover{
+  color:white;
+  background-color: ${({ theme }) => theme.background.wrongEffect};
+}
+
 
 Button{
 font-family: 'Rubik', sans-serif;

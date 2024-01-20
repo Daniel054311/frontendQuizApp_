@@ -14,6 +14,8 @@ export interface Theme extends DefaultTheme {
     Buttons: string;
     spanHover: string;
     spanActive: string;
+    correctEffect: string;
+    wrongEffect: string;
   };
   color: {
     main: string;
@@ -55,6 +57,8 @@ export const themes: Themes = {
       Buttons: "#A729F5",
       spanHover: " #F6E7FF",
       spanActive: " #A729F5",
+      correctEffect: "#26D782",
+    wrongEffect:  "#EE5454",
     },
     color: {
       main:"#313E51",
@@ -88,7 +92,9 @@ export const themes: Themes = {
       homeComponent: "#313E51",
       Buttons: "#A729F5",
       spanHover: " #F6E7FF",
-      spanActive:" #A729F5",
+      spanActive: " #A729F5",
+      correctEffect: "#26D782",
+      wrongEffect:  "#EE5454",
     },
     color: {
       main:"#FFFFFF",
