@@ -139,6 +139,7 @@ const QuestionsPage: React.FC = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
+    
     <div >
       <Header title={quizTitle} icon={quizIcon} />
    
