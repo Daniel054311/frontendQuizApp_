@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getQuizData } from "../services/Questionsdata";
 import { QuizData } from "../services/QuizTypes";
 import Header from "../header/header";
@@ -8,22 +8,22 @@ import {
   QPageWrapper,
   RightContainer,
 } from "./QuetionsPage.styles";
-import { CompletedPage } from "./completed/CompletedPage";
 import { ItalicP } from "./home/Home.styles";
 
 const QuestionsPage: React.FC = () => {
+  const navigate = useNavigate();
   const { quizId } = useParams<any>();
 
-  // Declaring the button text constants
+  // Constants
   const SUBMIT_ANSWER = "Submit Answer";
   const NEXT_QUESTION = "Next Question";
 
+  // State variables
   const [questions, setQuestions] = useState<QuizData["questions"]>([]);
   const [quizTitle, setQuizTitle] = useState<string>("");
   const [quizIcon, setQuizIcon] = useState<string>("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [correctMarks, setCorrectMarks] = useState<number>(0);
-  const [gameOver, setGameOver] = useState(true);
   const [optionSelected, setOptionSelected] = useState<boolean>(false);
   const [buttonClicked, setButtonClicked] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -32,16 +32,16 @@ const QuestionsPage: React.FC = () => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [optionsDisabled, setOptionsDisabled] = useState<boolean>(false);
 
-
-
-  const generateAlphabet = (length: number) => {
-    return Array.from({ length }, (_, index) =>
+  // Utility function to generate alphabet
+  const generateAlphabet = (length: number) => (
+    Array.from({ length }, (_, index) =>
       String.fromCharCode("A".charCodeAt(0) + index)
-    );
-  };
+    )
+  );
 
   const alphabet = generateAlphabet(questions.length);
 
+  // Event handlers
   const handleOptionClick = (selectedOption: string) => {
     const currentQuestion = questions[currentQuestionIndex];
 
@@ -63,12 +63,19 @@ const QuestionsPage: React.FC = () => {
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex === questions.length - 1) {
-      setGameOver(true);
+      navigate("/completion", {
+        state: {
+          title: quizTitle,
+          score: correctMarks,
+          icon: quizIcon,
+          length: questions.length,
+        },
+      });
     } else {
       if (optionSelected || optionsDisabled) {
         setOptionSelected(true);
 
-        if (selectedOption === currentQuestion.answer) {
+        if (selectedOption === questions[currentQuestionIndex].answer) {
           setIsCorrect(true);
         } else {
           setIsCorrect(false);
@@ -108,8 +115,8 @@ const QuestionsPage: React.FC = () => {
         break;
     }
   };
-  
 
+  // Fetch quiz data 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -119,7 +126,6 @@ const QuestionsPage: React.FC = () => {
         );
 
         if (selectedQuiz) {
-          setGameOver(false);
           setQuizTitle(selectedQuiz.title);
           setQuizIcon(selectedQuiz.icon);
           setQuestions(selectedQuiz.questions);
@@ -135,15 +141,15 @@ const QuestionsPage: React.FC = () => {
     fetchData();
   }, [quizId]);
 
-  const TOTAL_QUESTIONS = questions.length;
+  // Current question details
   const currentQuestion = questions[currentQuestionIndex];
+  const TOTAL_QUESTIONS = questions.length;
 
   return (
-    
-    <div >
+    <div>
       <Header title={quizTitle} icon={quizIcon} />
-   
-      {!gameOver && currentQuestion ? (
+
+      {currentQuestion && (
         <QPageWrapper>
           <LeftContainer
             trackerwidth={trackerWidth}
@@ -176,9 +182,7 @@ const QuestionsPage: React.FC = () => {
             <div>
               <ul>
                 {currentQuestion.options.map((option, index) => (
-                  <li onKeyDown={handleKeyDown} tabIndex={0}
-
-                  
+                  <li
                     key={index}
                     onClick={() =>
                       buttonText === NEXT_QUESTION
@@ -195,21 +199,16 @@ const QuestionsPage: React.FC = () => {
                       buttonText === SUBMIT_ANSWER
                         ? ""
                         : selectedOption === option
-                          ? isCorrect
-                            ? "correct"
-                            : "wrong"
-                          : ""
-                      
+                        ? isCorrect
+                          ? "correct"
+                          : "wrong"
+                        : ""
                     }`}
                   >
                     <span
-                  className={` ${
-                   buttonText !== NEXT_QUESTION
-                    ? "alphabet"
-                    : ""
-                 
-                  }`}
-                    
+                      className={` ${
+                        buttonText !== NEXT_QUESTION ? "alphabet" : ""
+                      }`}
                       style={{
                         backgroundColor:
                           optionSelected && selectedOption === option
@@ -217,7 +216,6 @@ const QuestionsPage: React.FC = () => {
                               ? " #a729f5"
                               : ""
                             : "",
-
                         color:
                           optionSelected &&
                           selectedOption === option &&
@@ -234,8 +232,8 @@ const QuestionsPage: React.FC = () => {
                     </picture>
                   </li>
                 ))}
-                <button 
-                 type="button"
+                <button
+                  type="button"
                   onClick={handleNextQuestion}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -254,30 +252,20 @@ const QuestionsPage: React.FC = () => {
 
             <div>
               <ul>
-                {buttonClicked &&
-                  !optionSelected &&
-                  buttonText !== NEXT_QUESTION &&
-                  !optionsDisabled && (
-                    <div className="bottomWrong">
-                      <picture style={{ width: "20px", height: "20px" }}>
-                        <img src="" alt="" />
-                      </picture>
-                      <div>
-                        <p>Please select an answer</p>
-                      </div>
+                {buttonClicked && !optionSelected && buttonText !== NEXT_QUESTION && !optionsDisabled && (
+                  <div className="bottomWrong">
+                    <picture style={{ width: "20px", height: "20px" }}>
+                      <img src="" alt="" />
+                    </picture>
+                    <div>
+                      <p>Please select an answer</p>
                     </div>
-                  )}
+                  </div>
+                )}
               </ul>
             </div>
           </RightContainer>
         </QPageWrapper>
-      ) : (
-        <CompletedPage
-          title={quizTitle}
-          length={questions.length}
-          score={correctMarks}
-          icon={quizIcon}
-        />
       )}
     </div>
   );
