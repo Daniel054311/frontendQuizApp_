@@ -5,9 +5,9 @@ import { HomeWrapper } from "../home/Home.styles";
 import { ScoredContainer, TotalScore } from "./Completed.styles";
 import Header from "../../header/header";
 
-interface CompletedPageProps {}
 
-export const CompletedPage: React.FC<CompletedPageProps> = () => {
+
+export const CompletedPage: React.FC = () => {
   const location = useLocation();
   const { title, score, icon, length } = location.state as {
     title: string;

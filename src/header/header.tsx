@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { themes } from "../themes/Themes";
 import { Accesibilty, GlobalStyle, StyledApp } from "./header.styles";
 
+interface HeaderProps {
+  title: string;
+  icon: string;
+}
 
 
-
-
-
-const Header: React.FC<{ title: string ,icon:string}> = (props) => {
+const Header: React.FC<HeaderProps> = ({ title, icon }) => {
 
   const [isDarkMode,setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
@@ -31,22 +32,22 @@ const Header: React.FC<{ title: string ,icon:string}> = (props) => {
 
           <div className="darkModeContainer">
             <Accesibilty>
-            <img src={props.icon} alt={props.title}
+            <img src={icon} alt={title}
              style={{
               backgroundColor:
-              props.title === "HTML"
+              title === "HTML"
                   ? "#FFF1E9"
-                  : props.title === "CSS"
+                  : title === "CSS"
                   ? "#E0FDEF"
-                  : props.title === "Accessibility"
+                  : title === "Accessibility"
                   ? "#F6E7FF"
-                  : props.title === "JavaScript"
+                  : title === "JavaScript"
                   ? "#EBF0FF"
                   : "transparent",
             }}
              />
 
-              <p style={{fontSize:"28px"}}>{props.title}</p>
+              <p style={{fontSize:"28px"}}>{title}</p>
             </Accesibilty>
 
             <div className='toglleContainer'>
