@@ -182,7 +182,7 @@ const QuestionsPage: React.FC = () => {
             <div>
               <ul>
                 {currentQuestion.options.map((option, index) => (
-                  <li
+                  <li onKeyDown={handleKeyDown} tabIndex={0}
                     key={index}
                     onClick={() =>
                       buttonText === NEXT_QUESTION

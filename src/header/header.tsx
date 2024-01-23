@@ -32,7 +32,7 @@ const Header: React.FC<{ title: string ,icon:string}> = (props) => {
  
     return (
     <>
-  <GlobalStyle theme={isDarkMode ? themes.dark : themes.light} />
+  <GlobalStyle theme={isDarkMode ? themes.dark : themes.light} isCorrect={null} />
    
      
 
