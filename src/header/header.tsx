@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { themes } from "../themes/Themes";
 import { Accesibilty, GlobalStyle, StyledApp } from "./header.styles";
 
@@ -8,11 +7,7 @@ import { Accesibilty, GlobalStyle, StyledApp } from "./header.styles";
 
 
 
-
 const Header: React.FC<{ title: string ,icon:string}> = (props) => {
-
-
-
 
   const [isDarkMode,setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
@@ -33,9 +28,6 @@ const Header: React.FC<{ title: string ,icon:string}> = (props) => {
     return (
     <>
   <GlobalStyle theme={isDarkMode ? themes.dark : themes.light} isCorrect={null} />
-   
-     
-
 
           <div className="darkModeContainer">
             <Accesibilty>
