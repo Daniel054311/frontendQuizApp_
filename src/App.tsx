@@ -8,7 +8,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="/questions/:quizId" element={<QuestionsPage />} />
         <Route path="/completion" element={<CompletedPage />} />
       </Routes>
