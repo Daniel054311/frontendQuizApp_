@@ -1,50 +1,131 @@
-/* global m */
-
-
-import React, {  useEffect, useState } from "react";
-import { useParams} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { getQuizData } from "../services/Questionsdata";
-import { QuizData  } from "../services/QuizTypes";
+import { QuizData } from "../services/QuizTypes";
 import Header from "../header/header";
 import {
   LeftContainer,
   QPageWrapper,
   RightContainer,
- 
 } from "./QuetionsPage.styles";
-import { CompletedPage } from "./completed/CompletedPage";
 import { ItalicP } from "./home/Home.styles";
 
-
-
 const QuestionsPage: React.FC = () => {
+  const navigate = useNavigate();
   const { quizId } = useParams<any>();
-  const [questions, setQuestions] = useState<
-    QuizData[][0]["questions"]
-  >([]);
+
+  // Constants
+  const SUBMIT_ANSWER = "Submit Answer";
+  const NEXT_QUESTION = "Next Question";
+
+  // State variables
+  const [questions, setQuestions] = useState<QuizData["questions"]>([]);
   const [quizTitle, setQuizTitle] = useState<string>("");
   const [quizIcon, setQuizIcon] = useState<string>("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const alphabet = ["A", "B", "C", "D"];
   const [correctMarks, setCorrectMarks] = useState<number>(0);
-  const [gameOver, setGameOver] = useState(true);
+  const [optionSelected, setOptionSelected] = useState<boolean>(false);
+  const [buttonClicked, setButtonClicked] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [trackerWidth, setTrackerWidth] = useState<number>(0);
+  const [buttonText, setButtonText] = useState<string>(SUBMIT_ANSWER);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [optionsDisabled, setOptionsDisabled] = useState<boolean>(false);
 
+  // Utility function to generate alphabet
+  const generateAlphabet = (length: number) => (
+    Array.from({ length }, (_, index) =>
+      String.fromCharCode("A".charCodeAt(0) + index)
+    )
+  );
 
+  const alphabet = generateAlphabet(questions.length);
 
+  // Event handlers
+  const handleOptionClick = (selectedOption: string) => {
+    const currentQuestion = questions[currentQuestionIndex];
+
+    if (currentQuestion) {
+      setSelectedOption(selectedOption);
+
+      if (selectedOption === currentQuestion.answer) {
+        setCorrectMarks((prevMarks) => prevMarks + 1);
+      }
+      setOptionSelected(true);
+      setOptionsDisabled(true);
+    }
+  };
+
+  const next = () => {
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    setTrackerWidth((prevWidth) => prevWidth + 10);
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex === questions.length - 1) {
+      navigate("/completion", {
+        state: {
+          title: quizTitle,
+          score: correctMarks,
+          icon: quizIcon,
+          length: questions.length,
+        },
+      });
+    } else {
+      if (optionSelected || optionsDisabled) {
+        setOptionSelected(true);
+
+        if (selectedOption === questions[currentQuestionIndex].answer) {
+          setIsCorrect(true);
+        } else {
+          setIsCorrect(false);
+        }
+
+        setButtonText(NEXT_QUESTION);
+
+        if (buttonText === NEXT_QUESTION) {
+          next();
+          setButtonText(SUBMIT_ANSWER);
+          setOptionsDisabled(false);
+        }
+
+        setOptionSelected(false);
+        setButtonClicked(false);
+      } else {
+        setButtonClicked(true);
+      }
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    switch (event.key) {
+      case "Enter":
+        if (buttonText === SUBMIT_ANSWER) {
+          if (optionSelected) {
+            handleNextQuestion();
+          } else {
+            setButtonClicked(true);
+          }
+        } else if (buttonText === NEXT_QUESTION) {
+          next();
+          setButtonText(SUBMIT_ANSWER);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Fetch quiz data 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const fetchedQuizzes: QuizData[] = await getQuizData();
-        let selectedQuiz;
+        const selectedQuiz = fetchedQuizzes.find(
+          (quiz) => quiz.id === parseInt(quizId!, 10)
+        );
 
-        for (const quiz of fetchedQuizzes) {
-          if (quiz.id === parseInt(quizId!, 10)) {
-            selectedQuiz = quiz;
-            break;
-          }
-        }
         if (selectedQuiz) {
-          setGameOver(false);
           setQuizTitle(selectedQuiz.title);
           setQuizIcon(selectedQuiz.icon);
           setQuestions(selectedQuiz.questions);
@@ -58,167 +139,133 @@ const QuestionsPage: React.FC = () => {
     };
 
     fetchData();
-  }, [quizId, history]);
+  }, [quizId]);
 
-  const [optionSelected, setOptionSelected] = useState<boolean>(false);
-  const [buttonClicked, setButtonClicked] = useState<boolean>(false);
-
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [trackerWidth, setTrackerWidth] = useState<number>(0);
-
-  // const handleOptionClick = (selectedOption: string) => {
-  //   const currentQuestion = questions[currentQuestionIndex];
-
-  //   if (currentQuestion && selectedOption === currentQuestion.answer) {
-  //     alert("Correct!");
-  //     setCorrectMarks((prevMarks) => prevMarks + 1);
-  //     setButtonClicked(true);
-  //   } else {
-  //     alert("Wrong!");
-  //   }
-
-  //   setSelectedOption(selectedOption);
-  //   setOptionSelected(true);
-  // };
-
-  const handleOptionClick = (selectedOption: string) => {
-    if (optionSelected) {
-      // User has already made a choice, ignore the click
-      return;
-    }
-    const currentQuestion = questions[currentQuestionIndex];
-  
-    if (currentQuestion) {
-      setSelectedOption(selectedOption);
-  
-      if (selectedOption === currentQuestion.answer) {
-        setCorrectMarks((prevMarks) => prevMarks + 1);
-        // setAnswerStatus("correct")
-      }else{
-        // setAnswerStatus("wrong")
-      }
-    }
-    setOptionSelected(true);
-  
-    // Disable other options
-    const updatedQuestions = [...questions];
-    updatedQuestions[currentQuestionIndex].options.forEach((option, index) => {
-      if (option !== selectedOption) {
-        updatedQuestions[currentQuestionIndex].options[index] ;
-      }
-    });
-    setQuestions(updatedQuestions);
-  };
-  
-
-
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex === TOTAL_QUESTIONS) {
-      setGameOver(true);
-    } 
-      if (optionSelected) {
-        setOptionSelected(false);
-        setButtonClicked(false); 
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-       // Set buttonClicked to false when an option is selected
-        
-        setTrackerWidth((prevWidth) => prevWidth + 10);
-      } else {
-        setButtonClicked(true); // Set buttonClicked to true when no option is selected
-      }
-    
-  };
-
-// onkeypress
-const handleKeyDown = (event: React.KeyboardEvent) => {
-  switch (event.key) {
-    case "Enter":
-      if (optionSelected){
-      // Handle the logic for selecting an option and moving to the next question
-      handleOptionClick(selectedOption!);
-      handleNextQuestion();
-      }else{
-        setButtonClicked(true);
-      }
-      break;
-    default:
-      
-      break;
-  }
-};
-
-
-  const TOTAL_QUESTIONS = questions.length;
+  // Current question details
   const currentQuestion = questions[currentQuestionIndex];
+  const TOTAL_QUESTIONS = questions.length;
 
   return (
-    <div onKeyDown={handleKeyDown} tabIndex={0}>
+    <div>
       <Header title={quizTitle} icon={quizIcon} />
-      {!gameOver && currentQuestion ? (
+
+      {currentQuestion && (
         <QPageWrapper>
-          <LeftContainer  trackerwidth={trackerWidth} style={{position:'relative',height:'26rem'}}>
+          <LeftContainer
+            trackerwidth={trackerWidth}
+            style={{ position: "relative", height: "26rem" }}
+          >
             <div>
-            <ItalicP style={{marginBottom:"28px"}}>
-              Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}
-            </ItalicP>
-            
-            <div style={{marginBottom:"15%"}}>
-            <p>{` ${currentQuestion.question}`}</p>
+              <ItalicP style={{ marginBottom: "28px" }}>
+                Question {currentQuestionIndex + 1} of {TOTAL_QUESTIONS}
+              </ItalicP>
+
+              <div style={{ marginBottom: "15%" }}>
+                <p>{` ${currentQuestion.question}`}</p>
+              </div>
             </div>
-            </div>
-            
-            <li className="sliderContainer" style={{padding:"3px",width:"100%",outline:'none',cursor:'default'}}>
+
+            <li
+              className="sliderContainer"
+              style={{
+                padding: "3px",
+                width: "100%",
+                outline: "none",
+                cursor: "default",
+              }}
+            >
               <div className="sliderTracker"></div>
-              </li>
-          
+            </li>
           </LeftContainer>
 
-
           <RightContainer>
+            <div>
+              <ul>
+                {currentQuestion.options.map((option, index) => (
+                  <li onKeyDown={handleKeyDown} tabIndex={0}
+                    key={index}
+                    onClick={() =>
+                      buttonText === NEXT_QUESTION
+                        ? null
+                        : handleOptionClick(option)
+                    }
+                    style={{
+                      outline:
+                        optionSelected && selectedOption === option
+                          ? "2px solid #a729f5"
+                          : "",
+                    }}
+                    className={` ${
+                      buttonText === SUBMIT_ANSWER
+                        ? ""
+                        : selectedOption === option
+                        ? isCorrect
+                          ? "correct"
+                          : "wrong"
+                        : ""
+                    }`}
+                  >
+                    <span
+                      className={` ${
+                        buttonText !== NEXT_QUESTION ? "alphabet" : ""
+                      }`}
+                      style={{
+                        backgroundColor:
+                          optionSelected && selectedOption === option
+                            ? buttonText !== NEXT_QUESTION
+                              ? " #a729f5"
+                              : ""
+                            : "",
+                        color:
+                          optionSelected &&
+                          selectedOption === option &&
+                          buttonText !== NEXT_QUESTION
+                            ? "#fff"
+                            : "",
+                      }}
+                    >
+                      {alphabet[index]}
+                    </span>
+                    <div className="option">{option}</div>
+                    <picture style={{ width: "20px", height: "20px" }}>
+                      <img src="" alt="" />
+                    </picture>
+                  </li>
+                ))}
+                <button
+                  type="button"
+                  onClick={handleNextQuestion}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleNextQuestion();
+                    }
+                  }}
+                  style={{
+                    marginTop: "10px",
+                  }}
+                >
+                  {buttonText}
+                </button>
+              </ul>
+            </div>
 
             <div>
-          <ul>
-            {currentQuestion.options.map((option, index) => (
-              <li
-                key={index}
-                onClick={() => handleOptionClick(option)}
-              >
-                <span className="alphabet">{alphabet[index]}</span>
-                <div className="option">{option} </div>
-                <picture style={{ width: "20px", height: "20px" }}>
-                  <img src="" alt="" />
-                </picture>
-              </li>
-            ))}
-            <button onClick={handleNextQuestion}>Submit Answer</button>
-          </ul>
-          </div>
-            
-            <div>
-          <ul>
-            
-          {buttonClicked && !optionSelected && (
-              <div className="bottomWrong">
-                <picture style={{ width: "20px", height: "20px" }}>
-                  <img src="" alt="" />
-                </picture>
-                <div>
-                <p >Please select an answer</p>
-                </div>
-              </div>
-            )}
-            </ul>
+              <ul>
+                {buttonClicked && !optionSelected && buttonText !== NEXT_QUESTION && !optionsDisabled && (
+                  <div className="bottomWrong">
+                    <picture style={{ width: "20px", height: "20px" }}>
+                      <img src="" alt="" />
+                    </picture>
+                    <div>
+                      <p>Please select an answer</p>
+                    </div>
+                  </div>
+                )}
+              </ul>
             </div>
           </RightContainer>
-
         </QPageWrapper>
-      ) : (
-        <CompletedPage
-          title={quizTitle}
-          length={questions.length}
-          score={correctMarks}
-          icon={quizIcon}
-        />
       )}
     </div>
   );
