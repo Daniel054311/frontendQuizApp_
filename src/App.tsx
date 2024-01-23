@@ -6,11 +6,17 @@ import CompletedPage from './pages/completed/CompletedPage';
 
 const App: React.FC = () => {
   return (
-    <Router basename="/"> 
-      <Routes>
-        <Route index element={<Home />} />
+    <Router> 
+      <Routes >
+        {/* <Route index element={<Home />} />
+        <Route path="/questions/:quizId" element={<QuestionsPage />} />
+        <Route path="/completion" element={<CompletedPage />} /> */}
+
+    <Route path='/'>
+        <Route path='' element={<Home />} />
         <Route path="/questions/:quizId" element={<QuestionsPage />} />
         <Route path="/completion" element={<CompletedPage />} />
+        </Route>
       </Routes>
     </Router>
   );
